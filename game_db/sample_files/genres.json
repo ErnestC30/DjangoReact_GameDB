@@ -1,0 +1,156 @@
+[
+    {
+        "model": "games.genre",
+        "pk": 1,
+        "fields": {
+            "name": "Action"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 2,
+        "fields": {
+            "name": "Platformer"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 3,
+        "fields": {
+            "name": "Shooter"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 4,
+        "fields": {
+            "name": "Fighting"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 5,
+        "fields": {
+            "name": "Stealth"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 6,
+        "fields": {
+            "name": "Survival"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 7,
+        "fields": {
+            "name": "Rhythm"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 8,
+        "fields": {
+            "name": "Battle Royale"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 9,
+        "fields": {
+            "name": "Metroidvania"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 10,
+        "fields": {
+            "name": "Visual Novel"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 11,
+        "fields": {
+            "name": "RPG"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 12,
+        "fields": {
+            "name": "MMO"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 13,
+        "fields": {
+            "name": "Roguelike"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 14,
+        "fields": {
+            "name": "Simulator"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 15,
+        "fields": {
+            "name": "Sports"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 16,
+        "fields": {
+            "name": "MOBA"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 17,
+        "fields": {
+            "name": "RTS"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 18,
+        "fields": {
+            "name": "Turn Based"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 19,
+        "fields": {
+            "name": "Racing"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 20,
+        "fields": {
+            "name": "Sandbox"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 21,
+        "fields": {
+            "name": "Horror"
+        }
+    },
+    {
+        "model": "games.genre",
+        "pk": 22,
+        "fields": {
+            "name": "Competitive"
+        }
+    }
+]
