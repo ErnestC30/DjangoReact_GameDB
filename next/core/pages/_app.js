@@ -4,6 +4,7 @@ import Head from "next/head";
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      {/*Bootstrap plugin*/}
       <Head>
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -17,7 +18,7 @@ function MyApp({ Component, pageProps }) {
           crossorigin="anonymous"
         ></script>
       </Head>
-
+      {console.log(pageProps)}
       <Component {...pageProps} />
     </>
   );
