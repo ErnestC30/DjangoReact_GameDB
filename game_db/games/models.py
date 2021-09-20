@@ -9,8 +9,9 @@ from io import BytesIO
 
 # 'manage.py loaddata sample_Files/genre.json' to load default tags into db
 
-DEFAULT_GAME_IMAGE = "default_profile_pic.png"
-THUMBNAIL_SIZE = (275, 350)
+DEFAULT_GAME_IMAGE = "default_game_image.png"
+DEFAULT_GAME_THUMBNAIL = "default_game_thumbnail.png"
+THUMBNAIL_SIZE = (225, 300)
 
 
 class Genre(models.Model):
@@ -26,7 +27,8 @@ class Game(models.Model):
     title = models.CharField(max_length=50)
     image = models.ImageField(
         default=DEFAULT_GAME_IMAGE, upload_to='game_pics')
-    thumbnail = models.ImageField(upload_to='thumbnail_pics')
+    thumbnail = models.ImageField(
+        default=DEFAULT_GAME_THUMBNAIL, upload_to='thumbnail_pics')
     description = models.TextField(blank=True)
     developer = models.CharField(max_length=30, blank=False)
     users_rating = models.FloatField(
@@ -39,21 +41,15 @@ class Game(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        """Decrease the image size for game image"""
+        """Decrease the image size for game image."""
 
         if not self.make_thumbnail():
             raise Exception('Error creating thumbnail')
 
         super(Game, self).save(*args, **kwargs)
-        """
-        img = Image.open(self.image.path)
-        if img.width > 275 or img.height > 350:
-            output_size = (275, 350)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
-        """
 
     def make_thumbnail(self):
+        """Generate a thumbnail sized image from uploaded image and stores into thumbnail field."""
         img = Image.open(self.image)
         img.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
         thumb_name, thumb_extension = os.path.splitext(self.image.name)

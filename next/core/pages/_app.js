@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import Head from "next/head";
+import Navbar from "../components/navbar";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -18,7 +19,7 @@ function MyApp({ Component, pageProps }) {
           crossorigin="anonymous"
         ></script>
       </Head>
-      {console.log(pageProps)}
+      <Navbar />
       <Component {...pageProps} />
     </>
   );
