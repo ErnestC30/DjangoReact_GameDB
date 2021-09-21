@@ -1,15 +1,20 @@
-export default function GameInfo({ game }) {
+export default function Game({ game }) {
   return (
-    <div className="game-container">
-      <li>
-        <p className="game-title">{game.title}</p>
-        <p className="game-developer">{game.developer}</p>
-        <p className="game-description">{game.description}</p>
-        <p className="game-user-rating">User Rating: {game.users_rating}</p>
-        <p className="game-num-user-rating">
-          Users Votes: {game.num_of_rating}
-        </p>
-      </li>
+    <div className="col">
+      <div className="padding">
+        <div className="game-container">
+          <div className="image-container">
+            <img
+              src={game.thumbnail}
+              alt="game thumbnail"
+              className="game-image"
+            />
+          </div>
+          <h1 className="game-title">{game.title}</h1>
+          <p className="game-developer">{game.developer}</p>
+          <p className="game-user-rating">Users Rating: {game.users_rating}</p>
+        </div>
+      </div>
     </div>
   );
 }

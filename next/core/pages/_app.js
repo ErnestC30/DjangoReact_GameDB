@@ -1,6 +1,7 @@
 import "../styles/globals.css";
+import "../styles/game_container.css";
 import Head from "next/head";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }) {
           crossorigin="anonymous"
         ></script>
       </Head>
+
       <Navbar />
       <Component {...pageProps} />
     </>

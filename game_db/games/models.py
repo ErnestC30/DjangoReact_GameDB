@@ -51,7 +51,7 @@ class Game(models.Model):
     def make_thumbnail(self):
         """Generate a thumbnail sized image from uploaded image and stores into thumbnail field."""
         img = Image.open(self.image)
-        img.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
+        resized_img = img.resize(THUMBNAIL_SIZE, Image.ANTIALIAS)
         thumb_name, thumb_extension = os.path.splitext(self.image.name)
         thumb_extension = thumb_extension.lower()
         thumb_filename = thumb_name + '_thumb' + thumb_extension
@@ -64,7 +64,7 @@ class Game(models.Model):
             return False
 
         temp_thumb = BytesIO()
-        img.save(temp_thumb, FTYPE)
+        resized_img.save(temp_thumb, FTYPE)
         temp_thumb.seek(0)
 
         self.thumbnail.save(thumb_filename, ContentFile(

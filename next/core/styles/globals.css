@@ -1,4 +1,17 @@
 html,
 body {
+  height: 100%;
+}
 
+.games-list {
+  background-color: rgb(6, 39, 73);
+}
+
+.header {
+  color: rgb(145, 145, 145);
+}
+
+.buffer {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
