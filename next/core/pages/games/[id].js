@@ -4,7 +4,10 @@ import GameInfo from "../../components/GameInfo";
 export default function GamePage({ game }) {
   return (
     <>
-      <GameInfo game={game} />;
+      <div className="container-fluid games-list">
+        <div className="header"></div>
+        <GameInfo game={game} />;
+      </div>
     </>
   );
 }
@@ -33,3 +36,4 @@ export async function getStaticProps(context) {
     props: { game: data },
   };
 }
+1;

@@ -1,0 +1,51 @@
+.gameInfoContainer {
+  background-color: rgb(3, 33, 43);
+  margin-top: 10px;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.imageContainer {
+  float: left;
+  margin: 10px;
+}
+
+.gameImage {
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
+
+.textContainer {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.gameTitle {
+  font-size: 40px;
+  color: rgb(166, 168, 180);
+  margin-bottom: 0px;
+}
+
+.developer {
+  color: rgb(142, 144, 155);
+  font-size: 22px;
+  margin-bottom: 0px;
+}
+
+.description {
+  color: rgb(166, 168, 180);
+  font-size: 18px;
+  margin-bottom: 0px;
+}
+
+.rating {
+  color: rgb(166, 168, 180);
+  margin-bottom: 0px;
+}
+
+.numOfRating {
+  color: rgb(166, 168, 180);
+  margin-bottom: 0px;
+}

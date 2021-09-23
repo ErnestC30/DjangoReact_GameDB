@@ -1,8 +1,18 @@
+/*Styling for Game component in /Games page*/
+
+.col {
+  height: 100%;
+}
+
 .game-container {
   border-radius: 10px;
   background: rgb(34, 34, 34);
   padding: 10px;
   height: 100%;
+}
+
+.game-container:hover {
+  background: rgb(3, 33, 43);
 }
 
 .padding {
@@ -33,4 +43,9 @@
 .game-user-rating {
   font-size: 16px;
   color: rgb(119, 119, 119);
+}
+
+.game-href {
+  color: black;
+  text-decoration: none;
 }

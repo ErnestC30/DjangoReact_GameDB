@@ -11,7 +11,7 @@ export default function Games({ games }) {
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 buffer">
           {games.map((game) => (
             <Link href={`/games/${game.id}`} key={game.id}>
-              <a>
+              <a className="game-href">
                 <Game game={game}></Game>
               </a>
             </Link>
