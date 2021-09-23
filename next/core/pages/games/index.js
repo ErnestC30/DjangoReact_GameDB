@@ -1,4 +1,5 @@
 import Game from "../../components/Game";
+import Link from "next/link";
 
 export default function Games({ games }) {
   return (
@@ -9,23 +10,14 @@ export default function Games({ games }) {
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 buffer">
           {games.map((game) => (
-            <Game key={game.id} game={game}></Game>
+            <Link href={`/games/${game.id}`} key={game.id}>
+              <a>
+                <Game game={game}></Game>
+              </a>
+            </Link>
           ))}
         </div>
       </div>
-      {/*
-      <div className="container-fluid">
-        <h1>Games Page</h1>
-        <div className="games-list">
-          <ul>
-            {games.map((game) => (
-              <GameInfo key={game.id} game={game}></GameInfo>
-            ))}
-          </ul>
-        </div>
-      </div>
-    
-    */}
     </>
   );
 }
