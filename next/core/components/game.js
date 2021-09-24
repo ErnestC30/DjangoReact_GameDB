@@ -1,3 +1,4 @@
+/*Component for each game display on pages/games/index */
 export default function Game({ game }) {
   return (
     <div className="col">

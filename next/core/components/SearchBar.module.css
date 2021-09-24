@@ -1,0 +1,11 @@
+.container {
+  float: right;
+}
+
+.description {
+  color: rgb(166, 168, 180);
+}
+
+.text {
+  font-size: 100px;
+}

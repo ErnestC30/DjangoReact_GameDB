@@ -20,8 +20,6 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
-# Add Image section
-
 
 class Game(models.Model):
     title = models.CharField(max_length=50)
