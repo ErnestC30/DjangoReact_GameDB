@@ -1,11 +1,14 @@
 .container {
-  float: right;
+  text-align: right;
 }
 
 .description {
   color: rgb(166, 168, 180);
+  font-size: 20px;
 }
 
-.text {
-  font-size: 100px;
+.inputField {
+  color: rgb(0, 0, 0);
+  background-color: rgb(173, 186, 199);
+  border-radius: 5px;
 }

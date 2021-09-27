@@ -11,10 +11,12 @@ export default function Games({ games }) {
 
   return (
     <>
-      <div className="container-fluid games-list">
-        <div className="row text-center">
-          <h1 className="header">Games</h1>
-          <SearchBar setSearchQuery={setSearchQuery} />
+      <div className="container-fluid">
+        <div className="row header">
+          <h1 className="header-title">Games</h1>
+          <div className="search-bar">
+            <SearchBar setSearchQuery={setSearchQuery} />
+          </div>
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 buffer">
           {gamesList.map((game) => (
@@ -31,6 +33,7 @@ export default function Games({ games }) {
 }
 
 /* Returns the list of Game objects that contain the searchQuery substring in either the game title or genres */
+/*OPTIONAL: LET USER SEARCH FOR MULTIPLE TAGS -> PARSE SPACES INTO SEPARATE SEARCH QUERY */
 function getGamesList(games, searchQuery) {
   const gamesList = !searchQuery
     ? games

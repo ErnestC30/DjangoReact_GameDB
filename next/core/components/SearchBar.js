@@ -3,12 +3,13 @@ import styles from "./SearchBar.module.css";
 export default function SearchBar({ setSearchQuery }) {
   return (
     <div className={styles.container}>
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
         <span className={styles.description}>Search Games: </span>
         <input
+          className={styles.inputField}
           type="text"
           id="search-field"
-          placeholder="Enter Title"
+          placeholder="Enter Title or Tags"
           name="search"
           onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}
         ></input>

@@ -31,13 +31,13 @@
 .developer {
   color: rgb(142, 144, 155);
   font-size: 22px;
+  margin-top: -7px;
   margin-bottom: 0px;
 }
 
 .description {
   color: rgb(166, 168, 180);
-  font-size: 18px;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 }
 
 .rating {
@@ -48,4 +48,15 @@
 .numOfRating {
   color: rgb(166, 168, 180);
   margin-bottom: 0px;
+  margin-left: 20px;
+}
+
+.genres {
+  color: rgb(166, 168, 180);
+}
+
+.genreType {
+  margin: 2px;
+  padding: 1px;
+  color: rgb(166, 168, 180);
 }
