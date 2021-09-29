@@ -10,6 +10,7 @@ export default function Home() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setWelcomeMessage(`Welcome ${data.username}`);
       })
       .catch((err) => {
