@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { loggedIn, loggedOut } from "../redux/userSlice";
 import Router from "next/router";
 
 export default function Login() {
   const [csrfToken, setCsrfToken] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch("http://localhost:8000/user/csrf/", {
@@ -13,7 +16,6 @@ export default function Login() {
       .then((res) => {
         let csrfToken = res.headers.get("X-CSRFToken");
         setCsrfToken(csrfToken);
-        console.log(csrfToken);
       })
       .catch((err) => {
         console.log(err);
@@ -36,9 +38,11 @@ export default function Login() {
         if (!response.ok) {
           throw new Error("Could not submit information.");
         }
+        return response.json();
       })
+      //data from JSONResponse in loginView
       .then((data) => {
-        console.log(data);
+        dispatch(loggedIn(data));
         Router.push("/");
       })
       .catch((err) => {
@@ -51,7 +55,7 @@ export default function Login() {
       <div className="container-fluid" style={{ marginTop: 80 }}>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label for="username" style={{ color: "#d6d6d6" }}>
+            <label htmlFor="username" style={{ color: "#d6d6d6" }}>
               Username
             </label>
             <input
@@ -64,7 +68,10 @@ export default function Login() {
             />
           </div>
           <div className="form-group">
-            <label for="password" style={{ color: "#d6d6d6", marginTop: 5 }}>
+            <label
+              htmlFor="password"
+              style={{ color: "#d6d6d6", marginTop: 5 }}
+            >
               Password
             </label>
             <input

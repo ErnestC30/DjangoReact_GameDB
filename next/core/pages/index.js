@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function Home() {
   const [welcomeMessage, setWelcomeMessage] = useState("");
+  //TEST useSelector
+  const name = useSelector((state) => state.user.username);
 
   useEffect(() => {
     fetch("http://localhost:8000/user/profile/", {
@@ -23,6 +26,7 @@ export default function Home() {
       <div className="introduction">
         <p>Home Page</p>
         <p>{welcomeMessage}</p>
+        <p>State says: {name}</p>
       </div>
     </>
   );
