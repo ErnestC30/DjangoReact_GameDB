@@ -43,7 +43,7 @@ export default function Login() {
       //data from JSONResponse in loginView
       .then((data) => {
         dispatch(loggedIn(data));
-        Router.push("/");
+        Router.push("/profile");
       })
       .catch((err) => {
         console.log(err);

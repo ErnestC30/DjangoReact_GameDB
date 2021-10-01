@@ -2,7 +2,7 @@
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django.views.decorators.http import require_POST
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import Profile
 from .serializers import ProfileSerializer
 from rest_framework.authentication import SessionAuthentication
@@ -35,9 +35,16 @@ def loginView(request):
     login(request, user)
     profile = Profile.objects.get(pk=user.id)
     serialized_profile = ProfileSerializer(profile)
-    # print(serialized_profile.data)
+    print('User logged in')
 
     return JsonResponse(serialized_profile.data)
+
+
+@require_POST
+def logoutView(request):
+    logout(request)
+    print('User logged out')
+    return JsonResponse({'Info': 'User has been logged out.'})
 
 
 class profileView(APIView):

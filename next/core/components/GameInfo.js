@@ -11,9 +11,11 @@ export default function GameInfo({ game }) {
         <p className={styles.developer}>{game.developer}</p>
         <p className={styles.description}>{game.description}</p>
         <div className={styles.genres}>
-          Genres:{" "}
+          Genres:
           {game.genres.map((genre) => (
-            <span className={styles.genreType}>{genre.name} </span>
+            <span key={genre.name} className={styles.genreType}>
+              {genre.name}
+            </span>
           ))}
         </div>
         <p className={styles.rating}>
