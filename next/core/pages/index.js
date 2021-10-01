@@ -1,7 +1,12 @@
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
 export default function Home() {
   return (
     <>
-      <p>Home Page</p>
+      <div className="introduction">
+        <p>Home Page</p>
+      </div>
     </>
   );
 }

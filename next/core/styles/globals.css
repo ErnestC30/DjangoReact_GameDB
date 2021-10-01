@@ -25,3 +25,8 @@ body {
 .buffer {
   margin-bottom: 10px;
 }
+
+.introduction {
+  color: rgb(145, 145, 145);
+  margin-top: 60px;
+}
