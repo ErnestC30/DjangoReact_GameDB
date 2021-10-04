@@ -13,9 +13,7 @@ export default function Profile() {
       credentials: "include",
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
+      .then((data) => {})
       .catch((err) => {});
   }, []);
 

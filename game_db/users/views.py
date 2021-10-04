@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django.views.decorators.http import require_POST
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from .models import Profile
 from .serializers import ProfileSerializer
 from rest_framework.authentication import SessionAuthentication
@@ -45,6 +46,35 @@ def logoutView(request):
     logout(request)
     print('User logged out')
     return JsonResponse({'Info': 'User has been logged out.'})
+
+
+@require_POST
+def registerView(request):
+    # need to check if user is already in database
+    # register user here
+    valid_user = True
+    valid_email = True
+
+    data = json.loads(request.body)
+    username = data.get('username')
+    email = data.get('email').lower()
+    password = data.get('password')
+
+    check_user = User.objects.filter(username=username).first()
+    if check_user:
+        valid_user = False
+
+    check_email = User.objects.filter(email=email).first()
+    if check_email:
+        valid_email = False
+
+    if valid_user and valid_email:
+        user = User.objects.create_user(username, email, password)
+        return JsonResponse({"type": 'success',
+                             "message": f'Account: {username} has been created.'})
+    else:
+        return JsonResponse({"type": 'error',
+                             "message:": 'Username or Email already exists.'})
 
 
 class profileView(APIView):

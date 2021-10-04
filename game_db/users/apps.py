@@ -1,6 +1,10 @@
 from django.apps import AppConfig
 
+# Register signals to Django
+
 
 class UsersConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
     name = 'users'
+
+    def ready(self):
+        import users.signals
