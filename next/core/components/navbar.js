@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 export default function NavBar() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const username = useSelector((state) => state.user.username);
 
   if (isLoggedIn) {
     return (
@@ -23,7 +24,7 @@ export default function NavBar() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" href="/profile">
+                <a className="nav-link active" href={`/profile/${username}`}>
                   Profile
                 </a>
               </li>
