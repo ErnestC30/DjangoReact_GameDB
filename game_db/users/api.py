@@ -1,4 +1,3 @@
-from rest_framework.generics import get_object_or_404
 from django.contrib.auth.models import User
 from users.models import Profile
 from rest_framework import viewsets, permissions
@@ -20,3 +19,4 @@ class ProfileViewSet(viewsets.ModelViewSet):
         # Context needed to generate full image URL
         serializer = ProfileSerializer(query, context={'request': request})
         return Response(serializer.data)
+

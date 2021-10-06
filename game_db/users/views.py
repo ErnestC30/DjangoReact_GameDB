@@ -1,5 +1,6 @@
 #from game_db.users.models import Profile
 from django.http import JsonResponse
+from django.middleware import csrf
 from django.middleware.csrf import get_token
 from django.views.decorators.http import require_POST
 from django.contrib.auth import authenticate, login, logout
@@ -9,6 +10,7 @@ from .serializers import ProfileSerializer
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
+from django.views.decorators.csrf import csrf_exempt
 
 import json
 
@@ -50,8 +52,6 @@ def logoutView(request):
 
 @require_POST
 def registerView(request):
-    # need to check if user is already in database
-    # register user here
     valid_user = True
     valid_email = True
 
@@ -75,6 +75,15 @@ def registerView(request):
     else:
         return JsonResponse({"type": 'error',
                              "message:": 'Username or Email already exists.'})
+
+
+@csrf_exempt
+@require_POST
+def editProfileView(request):
+    data = json.loads(request.body)
+    print(data)
+    # Grab Data and update database
+    return JsonResponse({})
 
 
 class profileView(APIView):

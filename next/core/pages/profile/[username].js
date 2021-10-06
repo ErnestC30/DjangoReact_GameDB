@@ -3,11 +3,11 @@ import Profile from "../../components/Profile";
 export default function ProfilePage({ profile }) {
   return (
     <>
-      <div className="container-fluid">
-        <p>a</p>
-        <p> Profile Page</p>
-        <p> Profile Page</p>
-        <p> Profile Page</p>
+      <div className="container-fluid buffer">
+        <p>fill</p>
+        <p>fill</p>
+        <p>fill</p>
+
         <Profile profile={profile} />
       </div>
     </>
@@ -35,7 +35,6 @@ export async function getStaticProps(context) {
   const username = context.params.username;
   const res = await fetch(`http://127.0.0.1:8000/user/profile/${username}`);
   const data = await res.json();
-  console.log(data);
 
   return {
     props: { profile: data },

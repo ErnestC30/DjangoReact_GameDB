@@ -1,3 +1,41 @@
+.profileContainer {
+  margin-top: 10px;
+  border-style: solid;
+  border-radius: 5px;
+  background-color: #28282b;
+  overflow: auto;
+}
+
+.imageContainer {
+  float: left;
+  margin: 5px;
+}
+
+.profileImage {
+  display: block;
+  border-radius: 10px;
+  max-width: 300px;
+  height: auto;
+}
+
+.textContainer {
+  margin: 10px;
+}
+
 .text {
+  margin-bottom: 2px;
   color: rgb(166, 168, 180);
+}
+
+.username {
+  color: rgb(212, 215, 228);
+  font-size: 150%;
+  margin-bottom: 0px;
+}
+
+.formContainer {
+  background-color: #28282b;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 10px;
 }
