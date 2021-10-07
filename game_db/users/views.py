@@ -11,8 +11,14 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import parser_classes
+from rest_framework.parsers import FormParser, MultiPartParser
+
 
 import json
+import os
+
+PROFILE_PIC_FOLDER = 'profile_pics/'
 
 
 def get_csrf(request):
@@ -38,6 +44,7 @@ def loginView(request):
     login(request, user)
     profile = Profile.objects.get(pk=user.id)
     serialized_profile = ProfileSerializer(profile)
+    print(serialized_profile.data)
     print('User logged in')
 
     return JsonResponse(serialized_profile.data)
@@ -77,12 +84,21 @@ def registerView(request):
                              "message:": 'Username or Email already exists.'})
 
 
+@parser_classes([FormParser, MultiPartParser])
 @csrf_exempt
-@require_POST
 def editProfileView(request):
-    data = json.loads(request.body)
-    print(data)
+    print(request)
     # Grab Data and update database
+    """
+    profile = Profile.objects.filter(user_id=data['userID']).first()
+    profile.user.email = data['email']
+    profile.description = data['description']
+    # saved file path, but need to create file too.
+    path = PROFILE_PIC_FOLDER + os.path.basename(data['image'])
+    profile.image = path
+    print(path)
+    """
+
     return JsonResponse({})
 
 
