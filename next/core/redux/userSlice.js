@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: {
+    userID: "",
     username: "initial state",
     email: "",
     image: "",
@@ -18,12 +19,14 @@ const userSlice = createSlice({
       //action payload will be the dictionary containing Profile model data
       state.user.username = action.payload.user.username;
       state.user.email = action.payload.user.email;
+      state.user.userID = action.payload.user_id;
       state.user.image = action.payload.image;
       state.user.description = action.payload.description;
       state.isLoggedIn = true;
     },
     loggedOut(state) {
       //reset to initial state?
+      state.user.userID = "";
       state.user.username = "logged out";
       state.user.email = "";
       state.user.image = "";

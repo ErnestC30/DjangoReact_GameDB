@@ -8,7 +8,9 @@ export default function Profile({ profile }) {
   const [showForm, setShowForm] = useState(false);
   const [email, setEmail] = useState(profile.user.email);
   const [description, setDescription] = useState(profile.description);
-  const [imageLink, setImageLink] = useState(profile.image);
+  const [imageLink, setImageLink] = useState("");
+  const [isImageAdded, setIsImageAdded] = useState(false);
+  const loggedInID = useSelector((state) => state.user.userID);
   const loggedInName = useSelector((state) => state.user.username);
   let button = <p></p>;
 
@@ -43,7 +45,12 @@ export default function Profile({ profile }) {
   function displayForm() {
     return (
       <>
-        <form className={styles.formContainer} onSubmit={handleSubmit}>
+        <form
+          className={styles.formContainer}
+          method="post"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+        >
           <div className="form-group">
             <label htmlFor="email" className={styles.text}>
               Email address
@@ -65,7 +72,11 @@ export default function Profile({ profile }) {
               type="file"
               className="form-control"
               id="image"
-              onChange={(e) => setImageLink(e.target.value)}
+              accept="image/*"
+              onChange={(e) => {
+                setImageLink(e.target.files[0]);
+                setIsImageAdded(true);
+              }}
             />
           </div>
           <div className="form-group">
@@ -94,20 +105,40 @@ export default function Profile({ profile }) {
   //Need to update database and redux store
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(csrfToken);
-    fetch("http://127.0.0.1:8000/user/edit_profile/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrfToken,
-      },
-      credentials: "include",
-      body: JSON.stringify({
+
+    let data = new FormData();
+    /*
+    data.append(
+      "postData",
+      JSON.stringify({
+        userID: loggedInID,
         email: email,
         description: description,
-        image: imageLink,
-      }),
+      })
+    );
+    */
+
+    data.append("userID", loggedInID);
+    data.append("email", email);
+    data.append("description", description);
+    if (isImageAdded) {
+      data.append("image", imageLink);
+    }
+
+    //         "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+    /*  HEADERS MIGHT BE BREAKING THE FETCH REQUEST?
+          headers: {
+        "Content-Type": "multipart/form-data",
+        "X-CSRFToken": csrfToken,
+      },
+    */
+    fetch("http://127.0.0.1:8000/user/edit_profile/", {
+      method: "POST",
+      credentials: "include",
+      body: data,
     }).then((response) => response);
+
+    //update store with dispatch after response
   }
 
   return (
