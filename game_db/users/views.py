@@ -13,6 +13,10 @@ from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.decorators import api_view
+from rest_framework import serializers, status
+from rest_framework import generics
+from rest_framework.response import Response
 
 
 import json
@@ -84,11 +88,13 @@ def registerView(request):
                              "message:": 'Username or Email already exists.'})
 
 
-@parser_classes([FormParser, MultiPartParser])
+'''
+@api_view(["POST"])
 @csrf_exempt
 def editProfileView(request):
-    print(request)
-    # Grab Data and update database
+    # see if this shit works
+    data = request.POST
+    print(data)
     """
     profile = Profile.objects.filter(user_id=data['userID']).first()
     profile.user.email = data['email']
@@ -99,7 +105,39 @@ def editProfileView(request):
     print(path)
     """
 
-    return JsonResponse({})
+return JsonResponse({})
+'''
+
+
+class editProfileView(APIView):
+    permission_class = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request, format="json"):
+        data = request.data
+        # print(data)
+        userID = request.data.get('userID')
+        profile = Profile.objects.get(user_id=userID)
+        profile.description = data.get('description')
+        if data.get('image'):
+            profile.image = data.get('image')
+        profile.save()
+
+        user = User.objects.get(pk=userID)
+        user.email = data.get('email')
+        user.save()
+
+        return Response('')
+
+
+"""
+        if serializer.is_valid():
+            print('valid serializer')
+            serializer.save()
+            return JsonResponse({'data': serializer.data})
+        else:
+            print('not valid serializer')
+            return Response('error') """
 
 
 class profileView(APIView):

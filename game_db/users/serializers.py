@@ -15,4 +15,5 @@ class ProfileSerializer(serializers.ModelSerializer):
     # added user_id -> check for error
     class Meta:
         model = Profile
-        fields = ['user', 'description', 'image', 'user_id']
+        #fields = ['user', 'description', 'image', 'user_id']
+        fields = '__all__'

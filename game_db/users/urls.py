@@ -13,7 +13,8 @@ urlpatterns = [
     path("login/", views.loginView, name="api-login"),
     path("logout/", views.logoutView, name="api-logout"),
     path("register/", views.registerView, name="api-register"),
-    path("edit_profile/", views.editProfileView, name="api-edit-profile"),
+    path("edit_profile/", views.editProfileView.as_view(),
+         name="api-edit-profile"),
 ]
 
 urlpatterns += router.urls
