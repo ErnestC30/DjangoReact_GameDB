@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 
 export default function NavBar() {
+  /*Component for user navigation */
+
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const username = useSelector((state) => state.user.username);
 
@@ -23,6 +25,8 @@ export default function NavBar() {
                   Games
                 </a>
               </li>
+            </ul>
+            <ul className="navbar-nav ms-auto">
               <li className="nav-item">
                 <a className="nav-link active" href={`/profile/${username}`}>
                   Profile
@@ -53,13 +57,20 @@ export default function NavBar() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" href="/login">
-                  Log In
+                <a className="nav-link active" href="/games">
+                  Games
+                </a>
+              </li>
+            </ul>
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item">
+                <a className="nav-link active" href="/register">
+                  Register
                 </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link active" href="/login">
-                  Register
+                  Log In
                 </a>
               </li>
             </ul>

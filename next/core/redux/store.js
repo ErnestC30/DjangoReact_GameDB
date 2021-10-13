@@ -23,6 +23,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, userSlice.reducer);
 
 export function makeStore() {
+  /* Initialize a persistent redux store */
   return configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
@@ -35,5 +36,4 @@ export function makeStore() {
 }
 
 const store = makeStore();
-
 export default store;

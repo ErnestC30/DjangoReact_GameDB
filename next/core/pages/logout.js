@@ -3,10 +3,12 @@ import { useDispatch } from "react-redux";
 import { loggedIn, loggedOut } from "../redux/userSlice";
 import Router from "next/router";
 
-//revert state to initial, remove session, redirect to home page
 export default function logout() {
+  /* Page for users to log out */
+
   const dispatch = useDispatch();
 
+  //Removes session information and clears store data before redirecting to home page.
   useEffect(() => {
     fetch("http://localhost:8000/user/csrf/", {
       credentials: "include",
@@ -37,7 +39,7 @@ export default function logout() {
     <>
       <div className="container-fluid" style={{ marginTop: 80 }}>
         <p style={{ color: "#d6d6d6" }}>
-          You have been logged out, returning to home page.
+          You have been logged out, automatically returning to home page.
         </p>
       </div>
     </>

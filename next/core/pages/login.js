@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loggedIn, loggedOut } from "../redux/userSlice";
+import { updateUserInfo } from "../redux/userSlice";
 import Router from "next/router";
 
 export default function Login() {
+  /* Log in page for registered users */
+
   const [csrfToken, setCsrfToken] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
+  //Get CSRF Token on page load.
   useEffect(() => {
     fetch("http://localhost:8000/user/csrf/", {
       credentials: "include",
@@ -23,6 +26,7 @@ export default function Login() {
   }, []);
 
   function handleSubmit(e) {
+    /* Allow user to log in if username and password matches. */
     //Can Add error checking here -> useState with error and display it underneath submit button for errors.
     e.preventDefault();
     fetch("http://localhost:8000/user/login/", {
@@ -40,10 +44,10 @@ export default function Login() {
         }
         return response.json();
       })
-      //data from JSONResponse in loginView
+      //Serialized Profile data from JSONResponse in loginView
       .then((data) => {
-        dispatch(loggedIn(data));
-        Router.push("/profile");
+        dispatch(updateUserInfo(data));
+        Router.push(`/profile/${username}`);
       })
       .catch((err) => {
         console.log(err);

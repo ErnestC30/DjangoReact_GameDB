@@ -1,6 +1,8 @@
 import styles from "./SearchBar.module.css";
 
 export default function SearchBar({ setSearchQuery }) {
+  /* Searchbar component to query games by title or tags */
+
   return (
     <div className={styles.container}>
       <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>

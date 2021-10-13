@@ -2,8 +2,12 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 import styles from "./Profile.module.css";
+import { updateUserInfo } from "../redux/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function Profile({ profile }) {
+  /*Component that displays the user's profile information */
+
   const [csrfToken, setCsrfToken] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [email, setEmail] = useState(profile.user.email);
@@ -12,8 +16,11 @@ export default function Profile({ profile }) {
   const [isImageAdded, setIsImageAdded] = useState(false);
   const loggedInID = useSelector((state) => state.user.userID);
   const loggedInName = useSelector((state) => state.user.username);
+  const dispatch = useDispatch();
+
   let button = <p></p>;
 
+  //Get CSRF Token on page load
   useEffect(() => {
     fetch("http://localhost:8000/user/csrf/", {
       credentials: "include",
@@ -27,7 +34,7 @@ export default function Profile({ profile }) {
       });
   }, []);
 
-  //Lets user edit their own profile.
+  //Edit Profile button if user is on their own page.
   if (loggedInName == profile.user.username) {
     button = (
       <button
@@ -41,7 +48,7 @@ export default function Profile({ profile }) {
     );
   }
 
-  //Edit email, image, description
+  //Displays form that allows user to edit email, description, or profile image.
   function displayForm() {
     return (
       <>
@@ -102,22 +109,12 @@ export default function Profile({ profile }) {
     );
   }
 
-  //Need to update database and redux store
   function handleSubmit(e) {
+    /* Updates the backend database and the redux store with edited information. */
+
     e.preventDefault();
 
     let data = new FormData();
-    /*
-    data.append(
-      "postData",
-      JSON.stringify({
-        userID: loggedInID,
-        email: email,
-        description: description,
-      })
-    );
-    */
-
     data.append("userID", loggedInID);
     data.append("email", email);
     data.append("description", description);
@@ -136,9 +133,15 @@ export default function Profile({ profile }) {
       method: "POST",
       credentials: "include",
       body: data,
-    }).then((response) => response);
-
-    //update store with dispatch after response
+    })
+      .then((response) => response.json())
+      //Use serialized Profile data to update redux store.
+      .then((data) => {
+        console.log(data);
+        dispatch(updateUserInfo(data));
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
   }
 
   return (

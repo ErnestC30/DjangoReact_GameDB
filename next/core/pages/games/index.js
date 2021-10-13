@@ -5,8 +5,10 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Games({ games }) {
+  /* Page that displays all games in the database */
+
+  //Filter gamesList with the given search query
   const [searchQuery, setSearchQuery] = useState("");
-  /*Filter gamesList with the given search query */
   const gamesList = getGamesList(games, searchQuery);
 
   return (

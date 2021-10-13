@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: {
     userID: "",
-    username: "initial state",
+    username: "",
     email: "",
     image: "",
     description: "",
@@ -11,12 +11,13 @@ const initialState = {
   isLoggedIn: false,
 };
 
+/* Configuration of reducers for the redux store */
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loggedIn(state, action) {
-      //action payload will be the dictionary containing Profile model data
+    updateUserInfo(state, action) {
+      //Receieve a payload containg serialized Profile data to update store.
       state.user.username = action.payload.user.username;
       state.user.email = action.payload.user.email;
       state.user.userID = action.payload.user_id;
@@ -25,9 +26,9 @@ const userSlice = createSlice({
       state.isLoggedIn = true;
     },
     loggedOut(state) {
-      //reset to initial state?
+      //Resets the store to initial state.
       state.user.userID = "";
-      state.user.username = "logged out";
+      state.user.username = "";
       state.user.email = "";
       state.user.image = "";
       state.user.description = "";
@@ -36,5 +37,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { loggedIn, loggedOut } = userSlice.actions;
+export const { updateUserInfo, loggedOut } = userSlice.actions;
 export default userSlice;

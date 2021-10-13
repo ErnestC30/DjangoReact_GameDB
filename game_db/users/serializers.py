@@ -12,8 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
 
-    # added user_id -> check for error
+    # __all__ in fields seems to cause error with profile edit?
     class Meta:
         model = Profile
-        #fields = ['user', 'description', 'image', 'user_id']
-        fields = '__all__'
+        fields = ['user', 'description', 'image', 'user_id']

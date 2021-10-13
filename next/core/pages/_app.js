@@ -9,6 +9,9 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 
 export default function MyApp({ Component, pageProps }) {
+  /* Main page builder */
+
+  //Persistent redux store
   let persistor = persistStore(store);
 
   return (

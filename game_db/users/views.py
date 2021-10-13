@@ -11,18 +11,13 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.decorators import parser_classes
 from rest_framework.parsers import FormParser, MultiPartParser
-from rest_framework.decorators import api_view
-from rest_framework import serializers, status
-from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
 
 
 import json
 import os
-
-PROFILE_PIC_FOLDER = 'profile_pics/'
 
 
 def get_csrf(request):
@@ -46,7 +41,7 @@ def loginView(request):
         return JsonResponse({"Info": "User does not exist"}, status=400)
 
     login(request, user)
-    profile = Profile.objects.get(pk=user.id)
+    profile = Profile.objects.get(user_id=user.id)
     serialized_profile = ProfileSerializer(profile)
     print(serialized_profile.data)
     print('User logged in')
@@ -80,33 +75,13 @@ def registerView(request):
         valid_email = False
 
     if valid_user and valid_email:
-        user = User.objects.create_user(username, email, password)
+        user = User.objects.create_user(
+            username=username, email=email, password=password)
         return JsonResponse({"type": 'success',
                              "message": f'Account: {username} has been created.'})
     else:
         return JsonResponse({"type": 'error',
                              "message:": 'Username or Email already exists.'})
-
-
-'''
-@api_view(["POST"])
-@csrf_exempt
-def editProfileView(request):
-    # see if this shit works
-    data = request.POST
-    print(data)
-    """
-    profile = Profile.objects.filter(user_id=data['userID']).first()
-    profile.user.email = data['email']
-    profile.description = data['description']
-    # saved file path, but need to create file too.
-    path = PROFILE_PIC_FOLDER + os.path.basename(data['image'])
-    profile.image = path
-    print(path)
-    """
-
-return JsonResponse({})
-'''
 
 
 class editProfileView(APIView):
@@ -115,7 +90,7 @@ class editProfileView(APIView):
 
     def post(self, request, format="json"):
         data = request.data
-        # print(data)
+        print(data)
         userID = request.data.get('userID')
         profile = Profile.objects.get(user_id=userID)
         profile.description = data.get('description')
@@ -127,17 +102,9 @@ class editProfileView(APIView):
         user.email = data.get('email')
         user.save()
 
-        return Response('')
-
-
-"""
-        if serializer.is_valid():
-            print('valid serializer')
-            serializer.save()
-            return JsonResponse({'data': serializer.data})
-        else:
-            print('not valid serializer')
-            return Response('error') """
+        print('profile edited')
+        serializer = ProfileSerializer(profile)
+        return JsonResponse(serializer.data)
 
 
 class profileView(APIView):

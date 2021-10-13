@@ -1,5 +1,6 @@
-/*Component for each game display on pages/games/index */
 export default function Game({ game }) {
+  /*Component to display each game in the database on the '/games' page */
+
   return (
     <div className="col">
       <div className="padding">

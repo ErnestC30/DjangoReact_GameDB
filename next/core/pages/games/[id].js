@@ -2,6 +2,8 @@
 import GameInfo from "../../components/GameInfo";
 
 export default function GamePage({ game }) {
+  /* Page that displays an individual game and allows users to rate and comment on the game */
+
   return (
     <>
       <div className="container-fluid games-list">

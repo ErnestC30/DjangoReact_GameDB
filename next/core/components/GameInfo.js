@@ -1,6 +1,8 @@
 import styles from "./GameInfo.module.css";
 
 export default function GameInfo({ game }) {
+  /*Component to display detailed individual game information */
+
   return (
     <div className={styles.gameInfoContainer}>
       <div className={styles.imageContainer}>

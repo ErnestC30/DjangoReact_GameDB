@@ -1,6 +1,9 @@
 import Profile from "../../components/Profile";
 
 export default function ProfilePage({ profile }) {
+  /* Page that displays a user's profile */
+  /* Can show favorited games ...*/
+
   return (
     <>
       <div className="container-fluid buffer">

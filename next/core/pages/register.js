@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
 export default function register() {
+  /* Page for new user to create an account */
+
   const [csrfToken, setCsrfToken] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -22,7 +24,7 @@ export default function register() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const isValidForm = true;
+    let isValidForm = true;
     if (!username || !email || !password || !passwordConfirm) {
       console.log("all fields must be filled out.");
       isValidForm = false;
