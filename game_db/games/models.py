@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.files.base import ContentFile
 from users.models import Profile
+from django.contrib.auth.models import User
 
 import os.path
 from PIL import Image
@@ -71,4 +72,16 @@ class Game(models.Model):
 
         return True
 
-# Add Review Object Many-To-One with Game and Profile
+
+class Comment(models.Model):
+    comment = models.TextField()
+    rating = models.FloatField(
+        validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='comments')
+    game = models.ForeignKey(
+        Game, on_delete=models.CASCADE, related_name='comments')
+    date_posted = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return (f'Game: {self.game.title}, Author: {self.author.username}')

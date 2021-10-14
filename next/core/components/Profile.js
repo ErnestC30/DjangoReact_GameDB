@@ -1,7 +1,6 @@
+import styles from "./Profile.module.css";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-
-import styles from "./Profile.module.css";
 import { updateUserInfo } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 

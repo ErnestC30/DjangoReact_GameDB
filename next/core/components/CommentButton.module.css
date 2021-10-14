@@ -1,0 +1,15 @@
+.formContainer {
+  background-color: #28282b;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.text {
+  margin-bottom: 2px;
+  color: rgb(166, 168, 180);
+}
+
+.rating {
+  width: 160px;
+}
