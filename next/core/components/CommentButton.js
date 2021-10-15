@@ -3,7 +3,7 @@ import styles from "./CommentButton.module.css";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-export default function CommentButton({ game }) {
+export default function CommentButton({ game, setGameComments }) {
   /* Button for logged in users that can open a comment form to be submitted */
   const [csrfToken, setCsrfToken] = useState("");
   const [showForm, setShowForm] = useState(false);
@@ -32,7 +32,7 @@ export default function CommentButton({ game }) {
       <button
         type="button"
         className={`btn btn-primary`}
-        style={{ marginTop: "5px" }}
+        style={{ marginTop: "10px", marginLeft: "5px" }}
         onClick={() => setShowForm(!showForm)}
       >
         Add Post
@@ -103,9 +103,7 @@ export default function CommentButton({ game }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    //Info to send to backend : rating, comment, game id, user id
-    console.log(`rating: ${rating}`);
-    console.log(`comment: ${comment}`);
+    //Fetch backend API to save comment
     fetch("http://127.0.0.1:8000/add_comment/", {
       method: "POST",
       headers: {
@@ -119,7 +117,11 @@ export default function CommentButton({ game }) {
         userID: userID,
         gameID: gameID,
       }),
-    }).then((response) => response);
+    })
+      //Get new Comment object in response and add to the list of comments.
+      .then((response) => response.json())
+      .then((data) => setGameComments([...game.comments, data]));
+    //Try and update comments state here (spread syntax append?)
   }
 
   if (!isLoggedIn) {

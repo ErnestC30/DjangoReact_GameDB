@@ -10,10 +10,10 @@ from .serializers import CommentSerializer
 import json
 
 
-# in backend -> serialize data, use to create object, then save object?
 @csrf_exempt
 @require_POST
 def postCommentView(request):
+    """Creates a Comment object into the database and returns the serialized data."""
     data = json.loads(request.body)
 
     rating = data.get('rating')
@@ -26,4 +26,6 @@ def postCommentView(request):
 
     # Also update game rating/num rating field?
 
-    return JsonResponse({'info': 'comment created'})
+    # Return serialized data
+    serializer = CommentSerializer(new_comment)
+    return JsonResponse({"comment": serializer.data})

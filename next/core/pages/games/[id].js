@@ -1,16 +1,26 @@
 //Stuff to add: GameInfo, Comment Section, Rating Option
 import GameInfo from "../../components/GameInfo";
 import CommentButton from "../../components/CommentButton";
+import Comment from "../../components/Comment";
+
+import { useState } from "react";
 
 export default function GamePage({ game }) {
   /* Page that displays an individual game and allows users to rate and comment on the game */
+  const [gameComments, setGameComments] = useState(game.comments);
+  console.log(gameComments);
 
   return (
     <>
-      <div className="container-fluid games-list">
+      <div className="container-fluid">
         <div className="header"></div>
         <GameInfo game={game} />
-        <CommentButton game={game} />
+        <CommentButton game={game} setGameComments={setGameComments} />
+        <div className="comment-container">
+          {gameComments.map((comment) => (
+            <Comment key={comment.id} comment={comment} />
+          ))}
+        </div>
       </div>
     </>
   );
