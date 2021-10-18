@@ -50,8 +50,10 @@
   text-decoration: none;
 }
 
-.comment-container {
+.flex-comment-container {
   background-color: #28282b;
   border-radius: 10px;
   margin-top: 20px;
+  display: flex;
+  flex-direction: column-reverse;
 }

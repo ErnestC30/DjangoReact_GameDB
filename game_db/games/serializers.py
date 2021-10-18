@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from games.models import Game, Genre, Comment
+from users.serializers import ProfileSerializer
 
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -11,9 +12,16 @@ class GenreSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     """Serializer for comments in a list of Comments to be stored into GameSerializer"""
+
     class Meta:
         model = Comment
         fields = "__all__"
+
+    # Displays the entire profile instance data instead of the ID for representation of author field
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['author'] = ProfileSerializer(instance.author).data
+        return rep
 
 
 class GameSerializer(serializers.ModelSerializer):

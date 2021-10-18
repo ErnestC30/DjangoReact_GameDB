@@ -78,10 +78,10 @@ class Comment(models.Model):
     rating = models.FloatField(
         validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='comments')
+        Profile, on_delete=models.CASCADE, related_name='comments')
     game = models.ForeignKey(
         Game, on_delete=models.CASCADE, related_name='comments')
     date_posted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return (f'Game: {self.game.title}, Author: {self.author.username}')
+        return (f'Game: {self.game.title}, Author: {self.author.user.username}')

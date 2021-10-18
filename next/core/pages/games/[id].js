@@ -7,6 +7,8 @@ import { useState } from "react";
 
 export default function GamePage({ game }) {
   /* Page that displays an individual game and allows users to rate and comment on the game */
+
+  //Store all comments associated with this game in a state.
   const [gameComments, setGameComments] = useState(game.comments);
   console.log(gameComments);
 
@@ -16,7 +18,7 @@ export default function GamePage({ game }) {
         <div className="header"></div>
         <GameInfo game={game} />
         <CommentButton game={game} setGameComments={setGameComments} />
-        <div className="comment-container">
+        <div className="flex-comment-container">
           {gameComments.map((comment) => (
             <Comment key={comment.id} comment={comment} />
           ))}
@@ -46,7 +48,6 @@ export async function getStaticProps(context) {
   const id = context.params.id;
   const res = await fetch(`http://127.0.0.1:8000/games/${id}`);
   const data = await res.json();
-  console.log(data);
 
   return {
     props: { game: data },

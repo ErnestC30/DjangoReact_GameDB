@@ -105,6 +105,7 @@ class editProfileView(APIView):
 
 
 class profileView(APIView):
+    # IS THIS EVEN USED? - MAYBE DELETABLE
     authentication_classes = [SessionAuthentication]
     permission_classes = [IsAuthenticated]
 

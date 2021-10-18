@@ -13,6 +13,7 @@ export default function CommentButton({ game, setGameComments }) {
   const userID = useSelector((state) => state.user.userID);
   const gameID = game.id;
 
+  //Load CSRF Token
   useEffect(() => {
     fetch("http://localhost:8000/user/csrf/", {
       credentials: "include",
@@ -26,6 +27,7 @@ export default function CommentButton({ game, setGameComments }) {
       });
   }, []);
 
+  //Button that creates a comment form when user is logged in
   let button;
   if (isLoggedIn) {
     button = (
@@ -42,7 +44,7 @@ export default function CommentButton({ game, setGameComments }) {
     button = null;
   }
 
-  //Displays form that allows user to post a comment (??? Give rating to game)
+  //Displays form that allows user to post a comment and rate the game
   function displayForm() {
     return (
       <>
@@ -120,7 +122,15 @@ export default function CommentButton({ game, setGameComments }) {
     })
       //Get new Comment object in response and add to the list of comments.
       .then((response) => response.json())
-      .then((data) => setGameComments([...game.comments, data]));
+      //Update state to show new comment recieved from API
+      .then((data) => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          const previousComments = game.comments;
+          setGameComments([...previousComments, data.comment]);
+        }
+      });
     //Try and update comments state here (spread syntax append?)
   }
 
@@ -131,7 +141,7 @@ export default function CommentButton({ game, setGameComments }) {
     return (
       <>
         {button}
-        {showForm ? displayForm() : null}{" "}
+        {showForm ? displayForm() : null}
       </>
     );
   }
