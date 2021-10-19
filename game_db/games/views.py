@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from users.models import Profile
 from .models import Game, Comment
-from .serializers import CommentSerializer
+from .serializers import CommentSerializer, GameSerializer
 
 
 import json
@@ -25,13 +25,18 @@ def postCommentView(request):
     if len(comments_query) > 0:
         return JsonResponse({'error': 'user has already posted once.'})
 
-    # Create new Comment object
+    # Create new Comment object.
     else:
         new_comment = Comment.objects.create(
             rating=rating, comment=comment, author=author, game=game)
 
-        # # Also update game rating/num rating field?
+        # Update number of rating and average user rating value for the game.
+        game.num_of_rating += 1
+        game.users_rating = (float(game.users_rating) + (float(new_comment.rating) -
+                             game.users_rating) / float(game.num_of_rating))
+        updated_game = game.save()
+        game_serializer = GameSerializer(game)
 
-        # Return serialized data
-        serializer = CommentSerializer(new_comment)
-        return JsonResponse({"comment": serializer.data})
+        # Return serialized data for comment and game.
+        comment_serializer = CommentSerializer(new_comment)
+        return JsonResponse({"comment": comment_serializer.data, "game": game_serializer.data})

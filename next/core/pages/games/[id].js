@@ -8,16 +8,27 @@ import { useState } from "react";
 export default function GamePage({ game }) {
   /* Page that displays an individual game and allows users to rate and comment on the game */
 
+  //Update rating stats when comment is posted.
+  const [gameRating, setGameRating] = useState(game.users_rating);
+  const [numOfRating, setNumOfRating] = useState(game.num_of_rating);
   //Store all comments associated with this game in a state.
   const [gameComments, setGameComments] = useState(game.comments);
-  console.log(gameComments);
 
   return (
     <>
       <div className="container-fluid">
         <div className="header"></div>
-        <GameInfo game={game} />
-        <CommentButton game={game} setGameComments={setGameComments} />
+        <GameInfo
+          game={game}
+          gameRating={gameRating}
+          numOfRating={numOfRating}
+        />
+        <CommentButton
+          game={game}
+          setGameComments={setGameComments}
+          setGameRating={setGameRating}
+          setNumOfRating={setNumOfRating}
+        />
         <div className="flex-comment-container">
           {gameComments.map((comment) => (
             <Comment key={comment.id} comment={comment} />

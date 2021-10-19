@@ -1,6 +1,6 @@
 import styles from "./GameInfo.module.css";
 
-export default function GameInfo({ game }) {
+export default function GameInfo({ game, gameRating, numOfRating }) {
   /*Component to display detailed individual game information */
 
   return (
@@ -21,9 +21,9 @@ export default function GameInfo({ game }) {
           ))}
         </div>
         <p className={styles.rating}>
-          Average Users Rating: {game.users_rating}
+          Average Users Rating: {gameRating}
           <span className={styles.numOfRating}>
-            # of User Ratings: {game.num_of_rating}
+            # of User Ratings: {numOfRating}
           </span>
         </p>
         <p className={styles.userLikes}>{game.likes}</p>

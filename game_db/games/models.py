@@ -8,7 +8,7 @@ import os.path
 from PIL import Image
 from io import BytesIO
 
-# 'manage.py loaddata sample_Files/genre.json' to load default tags into db
+# 'manage.py loaddata sample_Files/genre.json' to load default genre tags into db
 
 DEFAULT_GAME_IMAGE = "default_game_image.png"
 DEFAULT_GAME_THUMBNAIL = "default_game_thumbnail.png"
@@ -44,6 +44,9 @@ class Game(models.Model):
 
         if not self.make_thumbnail():
             raise Exception('Error creating thumbnail')
+
+        # Round rating to nearest tenth.
+        self.users_rating = round(self.users_rating, 1)
 
         super(Game, self).save(*args, **kwargs)
 

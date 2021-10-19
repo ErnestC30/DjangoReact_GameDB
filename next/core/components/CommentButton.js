@@ -3,7 +3,12 @@ import styles from "./CommentButton.module.css";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-export default function CommentButton({ game, setGameComments }) {
+export default function CommentButton({
+  game,
+  setGameComments,
+  setGameRating,
+  setNumOfRating,
+}) {
   /* Button for logged in users that can open a comment form to be submitted */
   const [csrfToken, setCsrfToken] = useState("");
   const [showForm, setShowForm] = useState(false);
@@ -122,16 +127,19 @@ export default function CommentButton({ game, setGameComments }) {
     })
       //Get new Comment object in response and add to the list of comments.
       .then((response) => response.json())
-      //Update state to show new comment recieved from API
+      //Update states to new values.
       .then((data) => {
         if (data.error) {
           console.log(data.error);
         } else {
           const previousComments = game.comments;
           setGameComments([...previousComments, data.comment]);
+          const updatedRating = data.game.users_rating;
+          setGameRating(updatedRating);
+          const updatedNumOfRating = data.game.num_of_rating;
+          setNumOfRating(updatedNumOfRating);
         }
       });
-    //Try and update comments state here (spread syntax append?)
   }
 
   if (!isLoggedIn) {
