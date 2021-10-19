@@ -1,7 +1,8 @@
 import styles from "./SearchBar.module.css";
 
 export default function SearchBar({ setSearchQuery }) {
-  /* Searchbar component to query games by title or tags */
+  /* Searchbar component to query games by title or tags.
+     Returns the text of the search query to the /games/index page */
 
   return (
     <div className={styles.container}>

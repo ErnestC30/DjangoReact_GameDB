@@ -34,18 +34,30 @@ export default function Games({ games }) {
   );
 }
 
-/* Returns the list of Game objects that contain the searchQuery substring in either the game title or genres */
-/*OPTIONAL: LET USER SEARCH FOR MULTIPLE TAGS -> PARSE SPACES INTO SEPARATE SEARCH QUERY */
 function getGamesList(games, searchQuery) {
+  /* Returns the list of Game objects that contain search query values in either the game title or genres */
+
+  //Split search query
+  const searchQueryList = searchQuery.split(" ");
+
   const gamesList = !searchQuery
     ? games
-    : games.filter(
-        (game) =>
-          game.title.toLowerCase().includes(searchQuery) ||
-          game.genres.some((genre) =>
-            genre.name.toLowerCase().includes(searchQuery)
-          )
-      );
+    : games.filter((game) => {
+        //Test if any of the search query values matches the game title or tags.
+        let validQuery = searchQueryList.some((query) => {
+          if (query.length == 0) {
+            return false;
+          } else {
+            return (
+              game.title.toLowerCase().includes(query) ||
+              game.genres.some((genre) =>
+                genre.name.toLowerCase().includes(query)
+              )
+            );
+          }
+        });
+        return validQuery;
+      });
   return gamesList;
 }
 
