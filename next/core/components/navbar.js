@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 export default function NavBar() {
   /*Component for user navigation */
 
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const username = useSelector((state) => state.user.username);
 
   if (isLoggedIn) {

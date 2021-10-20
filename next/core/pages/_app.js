@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import "../styles/game_container.css";
 import Head from "next/head";
 import Navbar from "../components/Navbar";
+import Alerts from "../components/Alerts";
 
 import { Provider } from "react-redux";
 import store from "../redux/store";
@@ -34,6 +35,7 @@ export default function MyApp({ Component, pageProps }) {
           </Head>
 
           <Navbar />
+          <Alerts />
           <Component {...pageProps} />
         </PersistGate>
       </Provider>

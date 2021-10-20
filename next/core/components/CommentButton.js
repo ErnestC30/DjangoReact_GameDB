@@ -2,6 +2,8 @@ import styles from "./CommentButton.module.css";
 
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { createAlert } from "../redux/alertSlice";
 
 export default function CommentButton({
   game,
@@ -14,9 +16,11 @@ export default function CommentButton({
   const [showForm, setShowForm] = useState(false);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState("");
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const userID = useSelector((state) => state.user.userID);
   const gameID = game.id;
+
+  const dispatch = useDispatch();
 
   //Load CSRF Token
   useEffect(() => {
@@ -138,6 +142,12 @@ export default function CommentButton({
           setGameRating(updatedRating);
           const updatedNumOfRating = data.game.num_of_rating;
           setNumOfRating(updatedNumOfRating);
+          dispatch(
+            createAlert({
+              message: "Your comment has been added.",
+              type: "success",
+            })
+          );
         }
       });
   }

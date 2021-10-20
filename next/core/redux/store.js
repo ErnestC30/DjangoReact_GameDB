@@ -12,6 +12,9 @@ import {
 } from "redux-persist";
 
 import userSlice from "./userSlice";
+import alertSlice from "./alertSlice";
+
+import rootReducer from "./combineReducers";
 
 const persistConfig = {
   //timeout -> loading time for page, if states are not loading properly increase timeout
@@ -20,7 +23,8 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userSlice.reducer);
+//userSlice.reducer
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export function makeStore() {
   /* Initialize a persistent redux store */
