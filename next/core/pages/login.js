@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateUserInfo } from "../redux/userSlice";
+import { createAlert } from "../redux/alertSlice";
 import Router from "next/router";
 
 export default function Login() {
@@ -40,7 +41,12 @@ export default function Login() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Could not submit information.");
+          dispatch(
+            createAlert({
+              type: "error",
+              message: "Invalid username or password.",
+            })
+          );
         }
         return response.json();
       })
@@ -56,7 +62,8 @@ export default function Login() {
 
   return (
     <>
-      <div className="container-fluid" style={{ marginTop: 80 }}>
+      <div className="container-fluid">
+        <h1 style={{ color: "#d6d6d6" }}>Login Page</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username" style={{ color: "#d6d6d6" }}>

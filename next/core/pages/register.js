@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { createAlert } from "../redux/alertSlice";
+import { useDispatch } from "react-redux";
+import Router from "next/router";
 
 export default function register() {
   /* Page for new user to create an account */
@@ -8,6 +11,7 @@ export default function register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch("http://localhost:8000/user/csrf/", {
@@ -25,35 +29,59 @@ export default function register() {
   function handleSubmit(e) {
     e.preventDefault();
     let isValidForm = true;
+    //All fields not filled out.
     if (!username || !email || !password || !passwordConfirm) {
-      console.log("all fields must be filled out.");
+      dispatch(
+        createAlert({
+          type: "error",
+          message: "All fields must be filled out.",
+        })
+      );
       isValidForm = false;
     }
+    //Incorrect password confirmation.
     if (password !== passwordConfirm) {
-      console.log("passwords must be identical");
+      dispatch(
+        createAlert({
+          type: "error",
+          message: "Passwords entered did not match.",
+        })
+      );
       isValidForm = false;
     }
 
-    fetch("http://localhost:8000/user/register/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrfToken,
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    if (isValidForm) {
+      fetch("http://localhost:8000/user/register/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          username: username,
+          email: email,
+          password: password,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          dispatch(
+            createAlert({
+              type: "success",
+              message: "Account was created.",
+            })
+          );
+          console.log(data);
+          setTimeout(() => Router.push("/login/"), 3050);
+        });
+      //Push to login page.
+    }
   }
 
   return (
     <>
-      <div className="container-fluid" style={{ marginTop: 80 }}>
+      <div className="container-fluid">
         <h1 style={{ color: "#d6d6d6" }}>Register </h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group" style={{ marginTop: "10px" }}>

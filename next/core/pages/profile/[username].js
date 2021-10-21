@@ -7,10 +7,6 @@ export default function ProfilePage({ profile }) {
   return (
     <>
       <div className="container-fluid buffer">
-        <p>fill</p>
-        <p>fill</p>
-        <p>fill</p>
-
         <Profile profile={profile} />
       </div>
     </>

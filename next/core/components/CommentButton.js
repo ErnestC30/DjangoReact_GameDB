@@ -22,7 +22,7 @@ export default function CommentButton({
 
   const dispatch = useDispatch();
 
-  //Load CSRF Token
+  //Load CSRF Token.
   useEffect(() => {
     fetch("http://localhost:8000/user/csrf/", {
       credentials: "include",
@@ -36,7 +36,7 @@ export default function CommentButton({
       });
   }, []);
 
-  //Button that creates a comment form when user is logged in
+  //Button that appears when user is logged in and creates a comment form.
   let button;
   if (isLoggedIn) {
     button = (
@@ -53,7 +53,7 @@ export default function CommentButton({
     button = null;
   }
 
-  //Displays form that allows user to post a comment and rate the game
+  //Displays form that allows user to post a comment and rate the game.
   function displayForm() {
     return (
       <>
@@ -68,6 +68,7 @@ export default function CommentButton({
             </label>
             <select
               className={`form-select ${styles.rating}`}
+              required
               onChange={(e) => {
                 setRating(e.target.value);
               }}
@@ -114,7 +115,7 @@ export default function CommentButton({
   function handleSubmit(e) {
     e.preventDefault();
 
-    //Fetch backend API to save comment
+    //Save comment to backend API database.
     fetch("http://127.0.0.1:8000/add_comment/", {
       method: "POST",
       headers: {
@@ -142,6 +143,7 @@ export default function CommentButton({
           setGameRating(updatedRating);
           const updatedNumOfRating = data.game.num_of_rating;
           setNumOfRating(updatedNumOfRating);
+
           dispatch(
             createAlert({
               message: "Your comment has been added.",

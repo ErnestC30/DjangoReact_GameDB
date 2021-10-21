@@ -7,32 +7,36 @@ import { removeAlert } from "../redux/alertSlice";
 //insert into apps under navbar?
 
 export default function Alerts() {
-  const [show, setShow] = useState(false);
   const alerts = useSelector((state) => state.alert.alerts);
   const dispatch = useDispatch();
 
   //Display any existing alerts before removing.
   useEffect(() => {
     if (alerts.length > 0) {
-      setShow(true);
       setTimeout(() => {
         dispatch(removeAlert());
-      }, 10000);
-    } else {
-      setShow(false);
+      }, 3000);
     }
   }, [alerts]);
 
-  //Display different color alert for success/error type
-  return show ? (
+  //Display different colored alert for success/error type and its message
+  return (
     <>
       <div className="container-fluid">
         <div className={styles.alertsContainer}>
-          {alerts.map((alert) => (
-            <p key={alert.message}>{alert.message}</p>
-          ))}
+          {alerts.map((alert) =>
+            alert.type == "success" ? (
+              <p className="alert alert-success" key={alert.message}>
+                {alert.message}
+              </p>
+            ) : (
+              <p className="alert alert-warning" key={alert.message}>
+                {alert.message}
+              </p>
+            )
+          )}
         </div>
       </div>
     </>
-  ) : null;
+  );
 }

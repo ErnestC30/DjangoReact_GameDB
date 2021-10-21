@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function GamePage({ game }) {
   /* Page that displays an individual game and allows users to rate and comment on the game */
 
-  //Update rating stats when comment is posted.
+  //Update rating stats when a comment is posted.
   const [gameRating, setGameRating] = useState(game.users_rating);
   const [numOfRating, setNumOfRating] = useState(game.num_of_rating);
   //Store all comments associated with this game in a state.
@@ -17,7 +17,6 @@ export default function GamePage({ game }) {
   return (
     <>
       <div className="container-fluid">
-        <div className="header"></div>
         <GameInfo
           game={game}
           gameRating={gameRating}

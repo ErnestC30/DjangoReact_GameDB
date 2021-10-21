@@ -2,10 +2,11 @@ import styles from "./Profile.module.css";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { updateUserInfo } from "../redux/userSlice";
+import { createAlert } from "../redux/alertSlice";
 import { useDispatch } from "react-redux";
 
 export default function Profile({ profile }) {
-  /*Component that displays the user's profile information */
+  /*Component that displays the user's profile information and allows them to edit information. */
 
   const [csrfToken, setCsrfToken] = useState("");
   const [showForm, setShowForm] = useState(false);
@@ -33,7 +34,7 @@ export default function Profile({ profile }) {
       });
   }, []);
 
-  //Edit Profile button if user is on their own page.
+  //Edit Profile button appears if user is on their own page.
   if (loggedInName == profile.user.username) {
     button = (
       <button
@@ -138,6 +139,12 @@ export default function Profile({ profile }) {
       .then((data) => {
         console.log(data);
         dispatch(updateUserInfo(data));
+        dispatch(
+          createAlert({
+            type: "success",
+            message: "Account information has been updated.",
+          })
+        );
         window.location.reload();
       })
       .catch((err) => console.log(err));
