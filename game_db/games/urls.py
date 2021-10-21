@@ -10,6 +10,8 @@ router = routers.DefaultRouter()
 
 router.register('games', GameViewSet, 'game-list-display')
 
-urlpatterns = [path("add_comment/", views.postCommentView, name='add-comment')]
+urlpatterns = [
+    path("api/add_comment/", views.postCommentView, name='add-comment'),
+    path("api/like_game/", views.postLikeView, name="like-game"), ]
 
 urlpatterns += router.urls

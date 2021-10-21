@@ -4,6 +4,7 @@
   border-radius: 10px;
   overflow: auto;
   min-width: 500px;
+  position: relative;
 }
 
 .imageContainer {
@@ -60,4 +61,10 @@
   margin: 2px;
   padding: 1px;
   color: rgb(166, 168, 180);
+}
+
+.likeButton {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }

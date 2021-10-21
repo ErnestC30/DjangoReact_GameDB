@@ -1,4 +1,5 @@
 import styles from "./GameInfo.module.css";
+import LikeButton from "./LikeButton";
 
 export default function GameInfo({ game, gameRating, numOfRating }) {
   /*Component to display detailed individual game information */
@@ -27,6 +28,9 @@ export default function GameInfo({ game, gameRating, numOfRating }) {
           </span>
         </p>
         <p className={styles.userLikes}>{game.likes}</p>
+        <div className={styles.likeButton}>
+          <LikeButton game={game} />
+        </div>
       </div>
     </div>
   );

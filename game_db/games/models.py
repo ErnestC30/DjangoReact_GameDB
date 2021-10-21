@@ -34,6 +34,7 @@ class Game(models.Model):
         validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
     num_of_rating = models.IntegerField(default=0)
     likes = models.ManyToManyField(Profile, blank=True)
+    num_of_likes = models.PositiveIntegerField(default=0)
     genres = models.ManyToManyField(Genre, blank=True)
 
     def __str__(self):

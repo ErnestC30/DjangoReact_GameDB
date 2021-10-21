@@ -1,3 +1,4 @@
+from django.views.decorators import csrf
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -40,3 +41,30 @@ def postCommentView(request):
         # Return serialized data for comment and game.
         comment_serializer = CommentSerializer(new_comment)
         return JsonResponse({"comment": comment_serializer.data, "game": game_serializer.data})
+
+
+@csrf_exempt
+@require_POST
+def postLikeView(request):
+    """Add a user's Profile into the Game's 'likes' list."""
+    data = json.loads(request.body)
+
+    user_id = data.get('userID')
+    game_id = data.get('gameID')
+
+    profile = Profile.objects.get(user_id=user_id)
+    game = Game.objects.get(id=game_id)
+
+    game.likes.add(profile)
+    game.num_of_likes += 1
+    game.save()
+
+    print('game liked')
+    return JsonResponse(
+        {
+            'alert': {'type': 'success',
+                      'message': 'You have added this game to your likes list.'},
+            'gameID': game_id
+        })
+
+# make view to remove from likes list
