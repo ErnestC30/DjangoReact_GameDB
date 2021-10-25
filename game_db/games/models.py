@@ -46,7 +46,7 @@ class Game(models.Model):
         if not self.make_thumbnail():
             raise Exception('Error creating thumbnail')
 
-        # Round rating to nearest tenth.
+        # Round user rating score to nearest tenth.
         self.users_rating = round(self.users_rating, 1)
 
         super(Game, self).save(*args, **kwargs)

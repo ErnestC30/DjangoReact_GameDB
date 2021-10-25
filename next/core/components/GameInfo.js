@@ -1,8 +1,14 @@
 import styles from "./GameInfo.module.css";
 import LikeButton from "./LikeButton";
 
+import { useState } from "react";
+
 export default function GameInfo({ game, gameRating, numOfRating }) {
   /*Component to display detailed individual game information */
+
+  const [numOfLikes, setNumOfLikes] = useState(game.num_of_likes);
+
+  console.log(game);
 
   return (
     <div className={styles.gameInfoContainer}>
@@ -27,9 +33,9 @@ export default function GameInfo({ game, gameRating, numOfRating }) {
             # of User Ratings: {numOfRating}
           </span>
         </p>
-        <p className={styles.userLikes}>{game.likes}</p>
+        <p className={styles.numOfLikes}>Number of Likes: {numOfLikes}</p>
         <div className={styles.likeButton}>
-          <LikeButton game={game} />
+          <LikeButton game={game} setNumOfLikes={setNumOfLikes} />
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ const initialState = {
   email: "",
   image: "",
   description: "",
+  likes: [],
   isLoggedIn: false,
 };
 
@@ -21,6 +22,7 @@ const userSlice = createSlice({
       state.userID = action.payload.user_id;
       state.image = action.payload.image;
       state.description = action.payload.description;
+      state.likes = action.payload.likes;
       state.isLoggedIn = true;
     },
     loggedOut: (state) => {
@@ -30,10 +32,15 @@ const userSlice = createSlice({
       state.email = "";
       state.image = "";
       state.description = "";
+      state.likes = [];
       state.isLoggedIn = false;
+    },
+    addUserLike: (state, action) => {
+      //Add newly liked game tite to the redux state.
+      state.likes = [...state.likes, action.payload];
     },
   },
 });
 
-export const { updateUserInfo, loggedOut } = userSlice.actions;
+export const { updateUserInfo, loggedOut, addUserLike } = userSlice.actions;
 export default userSlice;

@@ -1,3 +1,4 @@
+from os import truncate
 from rest_framework import serializers
 from games.models import Game, Genre, Comment
 from users.serializers import ProfileSerializer
@@ -27,8 +28,9 @@ class CommentSerializer(serializers.ModelSerializer):
 class GameSerializer(serializers.ModelSerializer):
     genres = GenreSerializer(many=True, read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
+    likes = ProfileSerializer(many=True)
 
     class Meta:
         model = Game
         fields = ['id', 'title', 'image', 'thumbnail', 'description',
-                  'developer', 'users_rating', 'num_of_rating', 'likes', 'genres', 'comments']
+                  'developer', 'users_rating', 'num_of_rating', 'likes', 'num_of_likes', 'genres', 'comments']

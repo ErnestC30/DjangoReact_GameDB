@@ -52,6 +52,8 @@ export default function Login() {
       })
       //Serialized Profile data from JSONResponse in loginView
       .then((data) => {
+        console.log(data);
+
         dispatch(updateUserInfo(data));
         Router.push(`/profile/${username}`);
       })

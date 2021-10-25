@@ -53,6 +53,12 @@
   margin-left: 20px;
 }
 
+.numOfLikes {
+  color: rgb(166, 168, 180);
+  margin-bottom: 0px;
+  margin-left: 20px;
+}
+
 .genres {
   color: rgb(166, 168, 180);
 }

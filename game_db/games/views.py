@@ -45,7 +45,7 @@ def postCommentView(request):
 
 @csrf_exempt
 @require_POST
-def postLikeView(request):
+def postAddLikeView(request):
     """Add a user's Profile into the Game's 'likes' list."""
     data = json.loads(request.body)
 
@@ -64,7 +64,13 @@ def postLikeView(request):
         {
             'alert': {'type': 'success',
                       'message': 'You have added this game to your likes list.'},
-            'gameID': game_id
+            'gameID': game_id,
+            'gameTitle': game.title
         })
 
-# make view to remove from likes list
+
+@csrf_exempt
+@require_POST
+def postRemoveLikeView(request):
+    # remove profile from associated game object
+    pass
