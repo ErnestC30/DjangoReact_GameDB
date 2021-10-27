@@ -40,7 +40,6 @@ def loginView(request):
     login(request, user)
     profile = Profile.objects.get(user_id=user.id)
     serialized_profile = ProfileSerializer(profile)
-    print(serialized_profile.data)
     print('User logged in')
 
     return JsonResponse(serialized_profile.data)

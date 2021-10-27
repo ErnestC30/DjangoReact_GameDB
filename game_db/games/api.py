@@ -1,3 +1,4 @@
+from django.db.models import query
 from games.models import Game
 from rest_framework import viewsets, permissions
 from .serializers import GameSerializer

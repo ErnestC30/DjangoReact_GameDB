@@ -1,0 +1,35 @@
+.col {
+  height: 100%;
+}
+
+.gameContainer {
+  border-radius: 10px;
+  background: rgb(34, 34, 34);
+  padding: 7px;
+  height: 100%;
+}
+
+.gameContainer:hover {
+  background: rgb(3, 33, 43);
+}
+
+.padding {
+  height: 100%;
+  padding: 3px;
+}
+
+.imageContainer {
+  text-align: center;
+}
+
+.gameImage {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.gameTitle {
+  font-size: clamp(1rem, 2vw, 2rem);
+  margin-top: 5px;
+  margin-bottom: 1px;
+  color: rgb(172, 169, 169);
+}

@@ -8,8 +8,6 @@ export default function GameInfo({ game, gameRating, numOfRating }) {
 
   const [numOfLikes, setNumOfLikes] = useState(game.num_of_likes);
 
-  console.log(game);
-
   return (
     <div className={styles.gameInfoContainer}>
       <div className={styles.imageContainer}>

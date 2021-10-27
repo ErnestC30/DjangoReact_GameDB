@@ -24,13 +24,13 @@ export default function Alerts() {
     <>
       <div className="container-fluid">
         <div className={styles.alertsContainer}>
-          {alerts.map((alert) =>
+          {alerts.map((alert, index) =>
             alert.type == "success" ? (
-              <p className="alert alert-success" key={alert.message}>
+              <p className="alert alert-success" key={index}>
                 {alert.message}
               </p>
             ) : (
-              <p className="alert alert-warning" key={alert.message}>
+              <p className="alert alert-warning" key={index}>
                 {alert.message}
               </p>
             )

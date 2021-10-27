@@ -1,4 +1,5 @@
 import Profile from "../../components/Profile";
+import ProfileLikes from "../../components/ProfileLikes";
 
 export default function ProfilePage({ profile }) {
   /* Page that displays a user's profile */
@@ -8,6 +9,7 @@ export default function ProfilePage({ profile }) {
     <>
       <div className="container-fluid buffer">
         <Profile profile={profile} />
+        <ProfileLikes profile={profile} />
       </div>
     </>
   );

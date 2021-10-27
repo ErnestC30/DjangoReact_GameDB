@@ -19,4 +19,3 @@ class ProfileViewSet(viewsets.ModelViewSet):
         # Context needed to generate full image URL
         serializer = ProfileSerializer(query, context={'request': request})
         return Response(serializer.data)
-

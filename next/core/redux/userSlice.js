@@ -36,11 +36,19 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
     },
     addUserLike: (state, action) => {
-      //Add newly liked game tite to the redux state.
-      state.likes = [...state.likes, action.payload];
+      //Add newly liked game title to the redux state.
+      const gameTitle = action.payload;
+      state.likes = [...state.likes, gameTitle];
+    },
+    removeUserLike: (state, action) => {
+      //Remove the game title from the redux state.
+      const gameTitle = action.payload;
+      const index = state.likes.indexOf(gameTitle);
+      state.likes.splice(index, 1);
     },
   },
 });
 
-export const { updateUserInfo, loggedOut, addUserLike } = userSlice.actions;
+export const { updateUserInfo, loggedOut, addUserLike, removeUserLike } =
+  userSlice.actions;
 export default userSlice;

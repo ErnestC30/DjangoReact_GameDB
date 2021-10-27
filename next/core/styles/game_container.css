@@ -50,10 +50,17 @@
   text-decoration: none;
 }
 
+.small-game-href {
+  color: black;
+  text-decoration: none;
+  padding: 2px;
+}
+
 .flex-comment-container {
   background-color: #28282b;
   border-radius: 10px;
   margin-top: 20px;
   display: flex;
   flex-direction: column-reverse;
+  min-width: 520px;
 }

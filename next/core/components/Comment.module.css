@@ -20,10 +20,16 @@
 }
 
 .username {
+  color: rgb(166, 168, 180);
   font-size: 150%;
   margin-bottom: 0px;
-  margin-left: 200px;
+  margin-left: 20px;
   vertical-align: middle;
+  text-decoration: none;
+}
+
+.username:hover {
+  color: white;
 }
 
 .rating {

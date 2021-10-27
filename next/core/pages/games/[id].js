@@ -1,4 +1,3 @@
-//Stuff to add: GameInfo, Comment Section, Rating Option
 import GameInfo from "../../components/GameInfo";
 import CommentButton from "../../components/CommentButton";
 import Comment from "../../components/Comment";
