@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export default function ProfileLikes({ profile }) {
-  //fetch game information from likes list
+  /* Displays the list of games that the user has liked. */
   const profileLikes = profile.likes;
   const [gamesList, setGamesList] = useState([]);
 
@@ -19,7 +19,6 @@ export default function ProfileLikes({ profile }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setGamesList(data["games_list"]);
       });
   }, []);

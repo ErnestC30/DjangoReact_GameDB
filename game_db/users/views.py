@@ -25,6 +25,7 @@ def get_csrf(request):
 
 @require_POST
 def loginView(request):
+    """Verifies login information and then authenticates user."""
     data = json.loads(request.body)
     username = data.get('username')
     password = data.get('password')
@@ -40,13 +41,13 @@ def loginView(request):
     login(request, user)
     profile = Profile.objects.get(user_id=user.id)
     serialized_profile = ProfileSerializer(profile)
-    print('User logged in')
 
     return JsonResponse(serialized_profile.data)
 
 
 @require_POST
 def logoutView(request):
+
     logout(request)
     print('User logged out')
     return JsonResponse({'Info': 'User has been logged out.'})
@@ -62,6 +63,7 @@ def registerView(request):
     email = data.get('email').lower()
     password = data.get('password')
 
+    # Check if username or email is already taken.
     check_user = User.objects.filter(username=username).first()
     if check_user:
         valid_user = False
@@ -73,11 +75,18 @@ def registerView(request):
     if valid_user and valid_email:
         user = User.objects.create_user(
             username=username, email=email, password=password)
-        return JsonResponse({"type": 'success',
-                             "message": f'Account: {username} has been created.'})
+        return JsonResponse({'alert': {"type": 'success',
+                                       "message": f'Account: {username} has been created. Redirecting to login page.'}})
     else:
-        return JsonResponse({"type": 'error',
-                             "message:": 'Username or Email already exists.'})
+        if not valid_user:
+            return JsonResponse({'alert': {"type": 'error',
+                                           "message": 'Username already exists.'}})
+        elif not valid_email:
+            return JsonResponse({'alert': {"type": 'error',
+                                           "message": 'Email already exists.'}})
+        else:
+            return JsonResponse({'alert': {"type": 'error',
+                                           'message': 'An error has occured'}})
 
 
 class editProfileView(APIView):
@@ -101,13 +110,3 @@ class editProfileView(APIView):
         print('profile edited')
         serializer = ProfileSerializer(profile)
         return JsonResponse(serializer.data)
-
-
-class profileView(APIView):
-    # IS THIS EVEN USED? - MAYBE DELETABLE
-    authentication_classes = [SessionAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    @staticmethod
-    def get(request, format=None):
-        return JsonResponse({"username": request.user.username})

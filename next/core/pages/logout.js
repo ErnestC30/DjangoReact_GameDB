@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loggedIn, loggedOut } from "../redux/userSlice";
+import { loggedOut } from "../redux/userSlice";
 import Router from "next/router";
 
 export default function logout() {

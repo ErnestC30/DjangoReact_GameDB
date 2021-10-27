@@ -68,12 +68,14 @@ export default function register() {
         .then((data) => {
           dispatch(
             createAlert({
-              type: "success",
-              message: "Account was created.",
+              type: data["alert"]["type"],
+              message: data["alert"]["message"],
             })
           );
-          console.log(data);
-          setTimeout(() => Router.push("/login/"), 3050);
+          //Reroute to login page on successful register.
+          if (data.alert.type == "success") {
+            setTimeout(() => Router.push("/login/"), 3050);
+          }
         });
       //Push to login page.
     }

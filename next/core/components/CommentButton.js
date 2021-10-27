@@ -135,8 +135,8 @@ export default function CommentButton({
       .then((response) => response.json())
       //Update states to new values.
       .then((data) => {
-        if (data.error) {
-          console.log(data.error);
+        if (data.alert.type == "error") {
+          console.log(data.alert.message);
         } else {
           const previousComments = game.comments;
           setGameComments([...previousComments, data.comment]);
@@ -144,14 +144,13 @@ export default function CommentButton({
           setGameRating(updatedRating);
           const updatedNumOfRating = data.game.num_of_rating;
           setNumOfRating(updatedNumOfRating);
-
-          dispatch(
-            createAlert({
-              message: "Your comment has been added.",
-              type: "success",
-            })
-          );
         }
+        dispatch(
+          createAlert({
+            message: data.alert.message,
+            type: data.alert.type,
+          })
+        );
       });
   }
 

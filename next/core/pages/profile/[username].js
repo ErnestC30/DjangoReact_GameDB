@@ -2,8 +2,7 @@ import Profile from "../../components/Profile";
 import ProfileLikes from "../../components/ProfileLikes";
 
 export default function ProfilePage({ profile }) {
-  /* Page that displays a user's profile */
-  /* Can show favorited games ...*/
+  /* Page that displays a user's profile information and liked games.*/
 
   return (
     <>

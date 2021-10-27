@@ -23,7 +23,8 @@ def postCommentView(request):
     # Error Check to see if user already posted a review for the game (only one review for each user per game).
     comments_query = author.comments.all().filter(game=game)
     if len(comments_query) > 0:
-        return JsonResponse({'error': 'user has already posted once.'})
+        return JsonResponse({"alert": {'type': 'error',
+                                       'message': 'You have already posted a comment. Delete or edit that comment.'}})
 
     # Create new Comment object.
     else:
@@ -35,12 +36,14 @@ def postCommentView(request):
         game.users_rating = (float(game.users_rating) + (float(new_comment.rating) -
                              game.users_rating) / float(game.num_of_rating))
         game.save()
-        #updated_game = game.save()
         game_serializer = GameSerializer(game)
 
         # Return serialized data for comment and game.
         comment_serializer = CommentSerializer(new_comment)
-        return JsonResponse({"comment": comment_serializer.data, "game": game_serializer.data})
+        return JsonResponse({"alert": {'type': 'success',
+                                       'message': 'Your comment has been added.'},
+                             "comment": comment_serializer.data,
+                             "game": game_serializer.data})
 
 
 @csrf_exempt
@@ -93,6 +96,7 @@ def postRemoveLikeView(request):
 @csrf_exempt
 @require_POST
 def getUserLikesView(request):
+    """Returns a serialized list of games that a user has liked."""
     data = json.loads(request.body)
     likes_list = data.get('likes')
 

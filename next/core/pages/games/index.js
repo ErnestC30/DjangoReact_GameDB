@@ -43,7 +43,7 @@ function getGamesList(games, searchQuery) {
   const gamesList = !searchQuery
     ? games
     : games.filter((game) => {
-        //Test if any of the search query values matches the game title or tags.
+        //Test if any of the search query values matches a game title or genre tag.
         let validQuery = searchQueryList.some((query) => {
           if (query.length == 0) {
             return false;
