@@ -6,9 +6,11 @@ import { useState } from "react";
 
 export default function ProfileLikes({ profile }) {
   /* Displays the list of games that the user has liked. */
+
   const profileLikes = profile.likes;
   const [gamesList, setGamesList] = useState([]);
 
+  //Get the list of the user's liked games.
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/get_user_likes/", {
       method: "POST",

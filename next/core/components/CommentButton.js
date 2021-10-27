@@ -12,6 +12,7 @@ export default function CommentButton({
   setNumOfRating,
 }) {
   /* Button for logged in users that can open a comment form to be submitted */
+
   const [csrfToken, setCsrfToken] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [comment, setComment] = useState("");
@@ -36,7 +37,7 @@ export default function CommentButton({
       });
   }, []);
 
-  //Button that appears when user is logged in and creates a comment form.
+  //Create a button that appears when user is logged in and creates a comment form.
   let button;
   if (isLoggedIn) {
     button = (
@@ -53,8 +54,8 @@ export default function CommentButton({
     button = null;
   }
 
-  //Displays form that allows user to post a comment and rate the game.
   function displayForm() {
+    /* Displays a form that allows user to post a comment and rate the game. */
     return (
       <>
         <form
@@ -113,10 +114,10 @@ export default function CommentButton({
   }
 
   function handleSubmit(e) {
+    /* Saves the comment and rating to the backend database. */
+
     e.preventDefault();
 
-    //Save comment to backend API database.
-    //NOTE: CHANGED TO /api/add_comment from /add_comment/
     fetch("http://127.0.0.1:8000/api/add_comment/", {
       method: "POST",
       headers: {
@@ -131,7 +132,6 @@ export default function CommentButton({
         gameID: gameID,
       }),
     })
-      //Get new Comment object in response and add to the list of comments.
       .then((response) => response.json())
       //Update states to new values.
       .then((data) => {
@@ -155,7 +155,7 @@ export default function CommentButton({
   }
 
   if (!isLoggedIn) {
-    //Hide button if not logged in.
+    //Hide button if the user is not logged in.
     return null;
   } else {
     return (

@@ -1,12 +1,11 @@
 import styles from "./Alerts.module.css";
 
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { removeAlert } from "../redux/alertSlice";
 
-//insert into apps under navbar?
-
 export default function Alerts() {
+  /* Alert component to view alerts dispatched from store. */
   const alerts = useSelector((state) => state.alert.alerts);
   const dispatch = useDispatch();
 
@@ -19,7 +18,7 @@ export default function Alerts() {
     }
   }, [alerts]);
 
-  //Display different colored alert for success/error type and its message
+  //Creates the alert message and use a different color depending if alert type is success or error.
   return (
     <>
       <div className="container-fluid">

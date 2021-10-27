@@ -48,8 +48,8 @@ export default function Profile({ profile }) {
     );
   }
 
-  //Displays form that allows user to edit email, description, or profile image.
   function displayForm() {
+    /* Displays form that allows user to edit email, description, or profile image. */
     return (
       <>
         <form
@@ -114,6 +114,7 @@ export default function Profile({ profile }) {
 
     e.preventDefault();
 
+    //Creates a form data object to send to backend as a 'multipart/form-data' structure
     let data = new FormData();
     data.append("userID", loggedInID);
     data.append("email", email);
@@ -122,13 +123,6 @@ export default function Profile({ profile }) {
       data.append("image", imageLink);
     }
 
-    //         "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-    /*  HEADERS MIGHT BE BREAKING THE FETCH REQUEST?
-          headers: {
-        "Content-Type": "multipart/form-data",
-        "X-CSRFToken": csrfToken,
-      },
-    */
     fetch("http://127.0.0.1:8000/user/edit_profile/", {
       method: "POST",
       credentials: "include",

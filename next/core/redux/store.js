@@ -11,9 +11,6 @@ import {
   REGISTER,
 } from "redux-persist";
 
-import userSlice from "./userSlice";
-import alertSlice from "./alertSlice";
-
 import rootReducer from "./combineReducers";
 
 const persistConfig = {

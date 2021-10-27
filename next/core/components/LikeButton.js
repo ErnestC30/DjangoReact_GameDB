@@ -13,7 +13,8 @@ export default function LikeButton({ game, setNumOfLikes }) {
   const userLikes = useSelector((state) => state.user.likes);
 
   function getButton() {
-    /*Create a like or unlike button depending on if the user has already liked the game.*/
+    /*Creates a like or unlike button depending on if the user has already liked the game.*/
+
     let button;
     if (userLikes.includes(game.title)) {
       button = (
@@ -55,8 +56,9 @@ export default function LikeButton({ game, setNumOfLikes }) {
   }, []);
 
   function addLike(e) {
+    /*Add the like to the backend db and updates the redux store.*/
+
     e.preventDefault();
-    /*Add the like to the backend db and redux store.*/
     fetch("http://127.0.0.1:8000/api/like_game/", {
       method: "POST",
       headers: {
@@ -78,7 +80,8 @@ export default function LikeButton({ game, setNumOfLikes }) {
   }
 
   function removeLike(e) {
-    /*Remove the like from the backend db and redux store.*/
+    /*Remove the like from the backend db and updates the redux store.*/
+
     e.preventDefault();
     fetch("http://127.0.0.1:8000/api/unlike_game/", {
       method: "POST",

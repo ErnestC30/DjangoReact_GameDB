@@ -4,6 +4,7 @@ import Link from "next/link";
 const BACKEND_ROUTE = "http://127.0.0.1:8000";
 
 export default function Comment({ comment }) {
+  /* Create display for each individual comment. */
   return (
     <div className={styles.commentContainer}>
       <div className={styles.infoContainer}>

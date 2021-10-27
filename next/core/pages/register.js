@@ -27,8 +27,12 @@ export default function register() {
   }, []);
 
   function handleSubmit(e) {
+    /* Checks for correct form information then sends to backend for further information validation.
+       Creates a new account and redirects to login page if all the information is valid. */
+
     e.preventDefault();
     let isValidForm = true;
+
     //All fields not filled out.
     if (!username || !email || !password || !passwordConfirm) {
       dispatch(
@@ -68,8 +72,8 @@ export default function register() {
         .then((data) => {
           dispatch(
             createAlert({
-              type: data["alert"]["type"],
-              message: data["alert"]["message"],
+              type: data.alert.type,
+              message: data.alert.message,
             })
           );
           //Reroute to login page on successful register.
@@ -77,7 +81,6 @@ export default function register() {
             setTimeout(() => Router.push("/login/"), 3050);
           }
         });
-      //Push to login page.
     }
   }
 
