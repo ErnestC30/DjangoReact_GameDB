@@ -29,7 +29,14 @@ export default function GamePage({ game }) {
         />
         <div className="flex-comment-container">
           {gameComments.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
+            <Comment
+              key={comment.id}
+              comment={comment}
+              gameComments={gameComments}
+              setGameComments={setGameComments}
+              setGameRating={setGameRating}
+              setNumOfRating={setNumOfRating}
+            />
           ))}
         </div>
       </div>

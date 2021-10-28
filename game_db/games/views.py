@@ -12,7 +12,7 @@ import json
 @csrf_exempt
 @require_POST
 def postCommentView(request):
-    """Creates a Comment object into the database and returns the serialized data."""
+    """Creates a Comment instance into the database and returns the serialized data."""
     data = json.loads(request.body)
 
     rating = data.get('rating')
@@ -24,7 +24,7 @@ def postCommentView(request):
     comments_query = author.comments.all().filter(game=game)
     if len(comments_query) > 0:
         return JsonResponse({"alert": {'type': 'error',
-                                       'message': 'You have already posted a comment. Delete or edit that comment.'}})
+                                       'message': 'You have already posted a comment. Delete or edit the existing comment.'}})
 
     # Create new Comment object.
     else:
@@ -33,8 +33,9 @@ def postCommentView(request):
 
         # Update number of rating and average user rating value for the game.
         game.num_of_rating += 1
-        game.users_rating = (float(game.users_rating) + (float(new_comment.rating) -
-                             game.users_rating) / float(game.num_of_rating))
+        # Change in average user's rating: new_average = average + ((value - average) / num_values)
+        game.users_rating = float(game.users_rating) + (
+            (float(new_comment.rating) - float(game.users_rating)) / float(game.num_of_rating))
         game.save()
         game_serializer = GameSerializer(game)
 
@@ -44,6 +45,53 @@ def postCommentView(request):
                                        'message': 'Your comment has been added.'},
                              "comment": comment_serializer.data,
                              "game": game_serializer.data})
+
+
+@csrf_exempt
+@require_POST
+def postDeleteCommentView(request):
+    """Deletes a Comment instance and updates the Game's rating."""
+    comment_id = json.loads(request.body)
+    comment = Comment.objects.get(pk=comment_id)
+    game = comment.game
+    game.num_of_rating -= 1
+    # Change in average user's rating: new_average = ((average * num_values) - value) / (num_values - 1)
+    game.users_rating = ((float(game.users_rating) * float(game.num_of_rating)) -
+                         float(comment.rating)) / (float(game.num_of_rating - 1))
+    game.save()
+    game_serializer = GameSerializer(game)
+    comment.delete()
+    return JsonResponse({"alert": {'type': 'success',
+                                   'message': 'Your comment has been deleted.'},
+                         "commentID": comment_id,
+                         "game": game_serializer.data})
+
+
+@csrf_exempt
+@require_POST
+def postEditCommentView(request):
+    """Edits an existing comment and updates the Game rating."""
+    data = json.loads(request.body)
+    new_rating = data['newRating']
+    old_rating = data['oldRating']
+    new_comment = data['comment']
+    comment = Comment.objects.get(pk=data['commentID'])
+    game = comment.game
+
+    # Calculate the new average user rating: new_average = average + ((new_value - old_value) / num_values )
+    game.users_rating = float(game.users_rating) + \
+        ((float(new_rating) - float(old_rating)) / float(game.num_of_rating))
+    comment.rating = new_rating
+    comment.comment = new_comment
+    comment.save()
+    game.save()
+    game_serializer = GameSerializer(game)
+
+    return JsonResponse({"alert": {'type': 'success',
+                                   'message': 'Your comment has been edited.'},
+                         "commentContent": new_comment,
+                         "commentRating": new_rating,
+                         "game": game_serializer.data})
 
 
 @csrf_exempt

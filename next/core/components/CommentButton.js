@@ -1,8 +1,7 @@
 import styles from "./CommentButton.module.css";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { createAlert } from "../redux/alertSlice";
 
 export default function CommentButton({
@@ -138,17 +137,15 @@ export default function CommentButton({
         if (data.alert.type == "error") {
           console.log(data.alert.message);
         } else {
-          const previousComments = game.comments;
-          setGameComments([...previousComments, data.comment]);
-          const updatedRating = data.game.users_rating;
-          setGameRating(updatedRating);
-          const updatedNumOfRating = data.game.num_of_rating;
-          setNumOfRating(updatedNumOfRating);
+          setGameComments(data.game.comments);
+          setGameRating(data.game.users_rating);
+          setNumOfRating(data.game.num_of_rating);
+          setShowForm(false);
         }
         dispatch(
           createAlert({
-            message: data.alert.message,
             type: data.alert.type,
+            message: data.alert.message,
           })
         );
       });
