@@ -104,6 +104,14 @@ export default function Login() {
             Submit
           </button>
         </form>
+        <div className="introduction">
+          <p>
+            Need an account? Go to the{" "}
+            <a href="/register/" className="home-link">
+              Register Page.
+            </a>
+          </p>
+        </div>
       </div>
     </>
   );

@@ -2,7 +2,6 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.files.base import ContentFile
 from users.models import Profile
-from django.contrib.auth.models import User
 
 import os.path
 from PIL import Image
@@ -43,8 +42,10 @@ class Game(models.Model):
     def save(self, *args, **kwargs):
         """Decrease the image size for game image."""
 
-        if not self.make_thumbnail():
-            raise Exception('Error creating thumbnail')
+        # Only create thumbnail when creating initial Game instance.
+        if self.thumbnail.name.endswith(DEFAULT_GAME_THUMBNAIL):
+            if not self.make_thumbnail():
+                raise Exception('Error creating thumbnail')
 
         # Round user rating score to nearest tenth.
         self.users_rating = round(self.users_rating, 1)

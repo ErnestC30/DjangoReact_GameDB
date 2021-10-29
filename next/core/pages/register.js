@@ -147,6 +147,14 @@ export default function register() {
             Submit
           </button>
         </form>
+        <div className="introduction">
+          <p>
+            Already have an account? Go to the{" "}
+            <a href="login" className="home-link">
+              Login Page.
+            </a>
+          </p>
+        </div>
       </div>
     </>
   );
