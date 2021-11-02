@@ -55,6 +55,7 @@ export default function CommentButton({
 
   function displayForm() {
     /* Displays a form that allows user to post a comment and rate the game. */
+
     return (
       <>
         <form

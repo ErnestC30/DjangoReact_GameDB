@@ -7,7 +7,7 @@ import os.path
 from PIL import Image
 from io import BytesIO
 
-# 'manage.py loaddata sample_Files/genre.json' to load default genre tags into db
+# 'manage.py loaddata sample_files/genre.json' to load default genre tags into db
 
 DEFAULT_GAME_IMAGE = "default_game_image.png"
 DEFAULT_GAME_THUMBNAIL = "default_game_thumbnail.png"
@@ -15,6 +15,8 @@ THUMBNAIL_SIZE = (225, 300)
 
 
 class Genre(models.Model):
+    """ Model for genre tags. """
+
     name = models.CharField(max_length=15, blank=False, unique=True)
 
     def __str__(self):
@@ -22,6 +24,8 @@ class Genre(models.Model):
 
 
 class Game(models.Model):
+    """ Model for each game object. """
+
     title = models.CharField(max_length=50)
     image = models.ImageField(
         default=DEFAULT_GAME_IMAGE, upload_to='game_pics')
@@ -40,7 +44,7 @@ class Game(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        """Decrease the image size for game image."""
+        """ Creates and saves a smaller thumbnail for the image."""
 
         # Only create thumbnail when creating initial Game instance.
         if self.thumbnail.name.endswith(DEFAULT_GAME_THUMBNAIL):
@@ -54,6 +58,7 @@ class Game(models.Model):
 
     def make_thumbnail(self):
         """Generate a thumbnail sized image from uploaded image and stores into thumbnail field."""
+
         img = Image.open(self.image)
         resized_img = img.resize(THUMBNAIL_SIZE, Image.ANTIALIAS)
         thumb_name, thumb_extension = os.path.splitext(self.image.name)
@@ -79,6 +84,8 @@ class Game(models.Model):
 
 
 class Comment(models.Model):
+    """ Model for comments for each Game. """
+
     comment = models.TextField()
     rating = models.FloatField(
         validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])

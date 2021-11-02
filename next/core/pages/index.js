@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 export default function Home() {
   /* Home page and introduction */
+
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const username = useSelector((state) => state.user.username);
 

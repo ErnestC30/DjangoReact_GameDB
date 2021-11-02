@@ -5,6 +5,7 @@ const initialState = {
 };
 
 /* Configuration of alert reducer functions for the redux store */
+
 const alertSlice = createSlice({
   name: "alert",
   initialState: initialState,

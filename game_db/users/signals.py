@@ -4,11 +4,10 @@ from django.dispatch import receiver
 from .models import Profile
 from django.core.exceptions import ObjectDoesNotExist
 
-# Create a Profile account when User is registered.
-
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
+    """ Creates a new Profile account when User is registered. """
     if created:
         print('signal recieved')
         Profile.objects.create(user=instance)

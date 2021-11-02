@@ -1,20 +1,16 @@
 #from game_db.users.models import Profile
 from django.http import JsonResponse
-from django.middleware import csrf
 from django.middleware.csrf import get_token
 from django.views.decorators.http import require_POST
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Profile
 from .serializers import ProfileSerializer
-from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.parsers import FormParser, MultiPartParser
 
-
 import json
-import os
 
 
 def get_csrf(request):
@@ -25,7 +21,8 @@ def get_csrf(request):
 
 @require_POST
 def loginView(request):
-    """Verifies login information and then authenticates user."""
+    """Verifies login information and then authenticates user into Django system."""
+
     data = json.loads(request.body)
     username = data.get('username')
     password = data.get('password')
@@ -49,12 +46,13 @@ def loginView(request):
 def logoutView(request):
 
     logout(request)
-    print('User logged out')
     return JsonResponse({'Info': 'User has been logged out.'})
 
 
 @require_POST
 def registerView(request):
+    """ Validates user information and then creates a new User and Profile instance. """
+
     valid_user = True
     valid_email = True
 
@@ -90,12 +88,13 @@ def registerView(request):
 
 
 class editProfileView(APIView):
+    """ Updates a user's Profile with new data. """
+
     permission_class = [IsAuthenticated]
     parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request, format="json"):
         data = request.data
-        print(data)
         userID = request.data.get('userID')
         profile = Profile.objects.get(user_id=userID)
         profile.description = data.get('description')
@@ -107,6 +106,5 @@ class editProfileView(APIView):
         user.email = data.get('email')
         user.save()
 
-        print('profile edited')
         serializer = ProfileSerializer(profile)
         return JsonResponse(serializer.data)

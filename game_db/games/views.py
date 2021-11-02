@@ -13,27 +13,28 @@ import json
 @require_POST
 def postCommentView(request):
     """Creates a Comment instance into the database and returns the serialized data."""
-    data = json.loads(request.body)
 
+    data = json.loads(request.body)
     rating = data.get('rating')
     comment = data.get('comment')
+
     author = Profile.objects.get(user_id=data.get('userID'))
     game = Game.objects.get(id=data.get('gameID'))
 
-    # Error Check to see if user already posted a review for the game (only one review for each user per game).
+    # Error check to see if user already posted a review for the game (only one review for each user per game).
     comments_query = author.comments.all().filter(game=game)
     if len(comments_query) > 0:
         return JsonResponse({"alert": {'type': 'error',
                                        'message': 'You have already posted a comment. Delete or edit the existing comment.'}})
 
-    # Create new Comment object.
+    # Create a new Comment object.
     else:
         new_comment = Comment.objects.create(
             rating=rating, comment=comment, author=author, game=game)
 
         # Update number of rating and average user rating value for the game.
-        game.num_of_rating += 1
         # Change in average user's rating: new_average = average + ((value - average) / num_values)
+        game.num_of_rating += 1
         game.users_rating = float(game.users_rating) + (
             (float(new_comment.rating) - float(game.users_rating)) / float(game.num_of_rating))
         game.save()
@@ -51,16 +52,19 @@ def postCommentView(request):
 @require_POST
 def postDeleteCommentView(request):
     """Deletes a Comment instance and updates the Game's rating."""
+
     comment_id = json.loads(request.body)
     comment = Comment.objects.get(pk=comment_id)
     game = comment.game
-    game.num_of_rating -= 1
+
     # Change in average user's rating: new_average = ((average * num_values) - value) / (num_values - 1)
+    game.num_of_rating -= 1
     game.users_rating = ((float(game.users_rating) * float(game.num_of_rating)) -
                          float(comment.rating)) / (float(game.num_of_rating - 1))
     game.save()
     game_serializer = GameSerializer(game)
     comment.delete()
+
     return JsonResponse({"alert": {'type': 'success',
                                    'message': 'Your comment has been deleted.'},
                          "commentID": comment_id,
@@ -71,10 +75,12 @@ def postDeleteCommentView(request):
 @require_POST
 def postEditCommentView(request):
     """Edits an existing comment and updates the Game rating."""
+
     data = json.loads(request.body)
     new_rating = data['newRating']
     old_rating = data['oldRating']
     new_comment = data['comment']
+
     comment = Comment.objects.get(pk=data['commentID'])
     game = comment.game
 
@@ -98,8 +104,8 @@ def postEditCommentView(request):
 @require_POST
 def postAddLikeView(request):
     """Add a user's Profile into the Game's 'likes' list."""
-    data = json.loads(request.body)
 
+    data = json.loads(request.body)
     user_id = data.get('userID')
     game_id = data.get('gameID')
 
@@ -122,8 +128,8 @@ def postAddLikeView(request):
 @require_POST
 def postRemoveLikeView(request):
     """Remove user's Profile from the Game's 'likes' list."""
-    data = json.loads(request.body)
 
+    data = json.loads(request.body)
     user_id = data.get('userID')
     game_id = data.get('gameID')
 
@@ -145,6 +151,7 @@ def postRemoveLikeView(request):
 @require_POST
 def getUserLikesView(request):
     """Returns a serialized list of games that a user has liked."""
+
     data = json.loads(request.body)
     likes_list = data.get('likes')
 

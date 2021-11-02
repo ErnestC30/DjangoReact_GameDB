@@ -6,6 +6,7 @@ import { removeAlert } from "../redux/alertSlice";
 
 export default function Alerts() {
   /* Alert component to view alerts dispatched from store. */
+
   const alerts = useSelector((state) => state.alert.alerts);
   const dispatch = useDispatch();
 
@@ -18,11 +19,11 @@ export default function Alerts() {
     }
   }, [alerts]);
 
-  //Creates the alert message and use a different color depending if alert type is success or error.
+  //Creates the alert message and uses a different color depending if alert type is success or error.
   return (
     <>
       <div className="container-fluid">
-        <div className={styles.alertsContainer}>
+        <div className={styles.alertContainer}>
           {alerts.map((alert, index) =>
             alert.type == "success" ? (
               <p className="alert alert-success" key={index}>

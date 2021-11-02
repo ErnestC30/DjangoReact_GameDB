@@ -35,7 +35,7 @@ export default function Games({ games }) {
 }
 
 function getGamesList(games, searchQuery) {
-  /* Returns the list of Game objects that contain search query values in either the game title or genres */
+  /* Returns the list of Game objects that contain search query values in either the game title or genre tags */
 
   //Split search query
   const searchQueryList = searchQuery.split(" ");
