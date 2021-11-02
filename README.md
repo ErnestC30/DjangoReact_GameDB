@@ -10,3 +10,5 @@ An admin Django account can be created in order to upload games in the admin pag
 **Sample Images**</br>
 
 **How to Use**</br>
+This project requires installation of the modules shown in *game_db/requirements.txt* and in *next/core/package.json*.</br>
+In *game_db/settings.py*, replace `SECRET_KEY=sec_key` with your own django secret key.</br>
