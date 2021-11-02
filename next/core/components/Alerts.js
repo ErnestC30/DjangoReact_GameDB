@@ -23,7 +23,7 @@ export default function Alerts() {
   return (
     <>
       <div className="container-fluid">
-        <div className={styles.alertContainer}>
+        <div className={styles.alertsContainer}>
           {alerts.map((alert, index) =>
             alert.type == "success" ? (
               <p className="alert alert-success" key={index}>
