@@ -30,6 +30,9 @@ To run the servers:</br>
 In the `game_db` directory, use `python manage.py runserver` to start the Django backend.</br>
 In the `next/core` directory, use `npm run dev` to start the NextJS developmental frontend.</br>
 
+**Features Learned**</br>
+React Components, NextJS Alerts, Django Rest Framework, Likes/Favoriting, Searchbar, Data Serialization, Redux Stores, Alerts, React Hooks
+
 **License**<br/>
 MIT License
 
