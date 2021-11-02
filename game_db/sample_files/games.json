@@ -1,0 +1,178 @@
+[
+  {
+    "model": "games.game",
+    "pk": 3,
+    "fields": {
+      "title": "Sekiro",
+      "image": "game_pics/sekiro.PNG",
+      "thumbnail": "thumbnail_pics/sekiro_thumb.png",
+      "description": "Sekiro: Shadows Die Twice[a] is a 2019 action-adventure game developed by FromSoftware and published by Activision. The game follows a shinobi known as Sekiro as he attempts to take revenge on a samurai clan who attacked him and kidnapped his lord.",
+      "developer": "FromSoft",
+      "users_rating": 0.0,
+      "num_of_rating": 0,
+      "num_of_likes": 0,
+      "likes": [],
+      "genres": [1, 4, 5]
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 4,
+    "fields": {
+      "title": "Apex Legends",
+      "image": "game_pics/apex_legends.PNG",
+      "thumbnail": "thumbnail_pics/apex_legends_thumb.png",
+      "description": "Apex Legends is an online multiplayer battle royale game featuring squads of three players using pre-made characters with distinctive abilities, called \"Legends\", similar to those of hero shooters.",
+      "developer": "Respawn",
+      "users_rating": 0.0,
+      "num_of_rating": 0,
+      "num_of_likes": 0,
+      "likes": [],
+      "genres": [1, 3, 8, 22]
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 5,
+    "fields": {
+      "title": "Back 4 Blood",
+      "image": "game_pics/back_4_blood.png",
+      "thumbnail": "thumbnail_pics/back_4_blood_thumb.png",
+      "description": "Back 4 Blood is a thrilling cooperative first-person shooter from the creators of the critically acclaimed Left 4 Dead franchise. You are at the center of a war against the Ridden. These once-human hosts of a deadly parasite have turned into terrifying creatures bent on devouring what remains of civilization. With humanityÆs extinction on the line, itÆs up to you and your friends to take the fight to the enemy, eradicate the Ridden, and reclaim the world.",
+      "developer": "Turtle Rock Studios",
+      "users_rating": 0.0,
+      "num_of_rating": 0,
+      "num_of_likes": 0,
+      "likes": [],
+      "genres": [1, 3, 5, 6, 21]
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 6,
+    "fields": {
+      "title": "Command and Conquer 3",
+      "image": "game_pics/command_and_conquer_3.PNG",
+      "thumbnail": "thumbnail_pics/command_and_conquer_3_thumb.png",
+      "description": "The year is 2047. A massive nuclear fireball explodes high in the night sky, marking the dramatic beginning of the Third Tiberium War and the long-awaited return of the most groundbreaking Real-Time Strategy franchise of all time.",
+      "developer": "EA",
+      "users_rating": 0.0,
+      "num_of_rating": 0,
+      "num_of_likes": 0,
+      "likes": [],
+      "genres": [17, 22]
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 7,
+    "fields": {
+      "title": "Dark Souls 3",
+      "image": "game_pics/dark_souls_3.PNG",
+      "thumbnail": "thumbnail_pics/dark_souls_3_thumb.png",
+      "description": "Dark Souls continues to push the boundaries with the latest, ambitious chapter in the critically-acclaimed and genre-defining series. Prepare yourself and Embrace The Darkness!",
+      "developer": "FromSoft",
+      "users_rating": 0.0,
+      "num_of_rating": 0,
+      "num_of_likes": 0,
+      "likes": [],
+      "genres": [1, 5]
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 8,
+    "fields": {
+      "title": "God of War",
+      "image": "game_pics/god_of_war.PNG",
+      "thumbnail": "thumbnail_pics/god_of_war_thumb.png",
+      "description": "After wiping out the gods of Mount Olympus, Kratos moves on to the frigid lands of Scandinavia, where he and his son must embark on an odyssey across a dangerous world of gods and monsters.",
+      "developer": "Santa Monica",
+      "users_rating": 0.0,
+      "num_of_rating": 0,
+      "num_of_likes": 0,
+      "likes": [],
+      "genres": [1, 2]
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 9,
+    "fields": {
+      "title": "Grand Theft Auto 5",
+      "image": "game_pics/gta_5.PNG",
+      "thumbnail": "thumbnail_pics/gta_5_thumb.png",
+      "description": "Grand Theft Auto V is set circa 2013 in the city of Los Santos and its surrounding areas and tells the stories of three protagonists: Michael De Santa, Franklin Clinton, and Trevor Philips.",
+      "developer": "Rockstar Games",
+      "users_rating": 0.0,
+      "num_of_rating": 0,
+      "num_of_likes": 0,
+      "likes": [],
+      "genres": [1, 20]
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 10,
+    "fields": {
+      "title": "Hollow Knight",
+      "image": "game_pics/hollow_knight.png",
+      "thumbnail": "thumbnail_pics/hollow_knight_thumb.png",
+      "description": "Hollow Knight is a 2D Metroidvania action-adventure game, that takes place in Hallownest, a fictional ancient kingdom. The player controls an insect-like, silent, and nameless knight while exploring the underground world. The knight wields a nail, which is a type of sword, used both in combat and environmental interaction.",
+      "developer": "Team Cherry",
+      "users_rating": 0.0,
+      "num_of_rating": 0,
+      "num_of_likes": 0,
+      "likes": [],
+      "genres": [1, 2, 9, 21]
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 11,
+    "fields": {
+      "title": "League of Legends",
+      "image": "game_pics/league_of_legends.PNG",
+      "thumbnail": "thumbnail_pics/league_of_legends_thumb.png",
+      "description": "League of Legends (LoL), commonly referred to as League, is a 2009 multiplayer online battle arena video game developed and published by Riot Games. Inspired by Defense of the Ancients, a custom map for Warcraft III, Riot's founders sought to develop a stand-alone game in the same genre.",
+      "developer": "Riot Games",
+      "users_rating": 0.0,
+      "num_of_rating": 0,
+      "num_of_likes": 0,
+      "likes": [],
+      "genres": [16, 22]
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 12,
+    "fields": {
+      "title": "Minecraft",
+      "image": "game_pics/minecraft.PNG",
+      "thumbnail": "thumbnail_pics/minecraft_thumb.png",
+      "description": "Minecraft is a video game in which players create and break apart various kinds of blocks in three-dimensional worlds. The gameÆs two main modes are Survival and Creative.",
+      "developer": "Mojang Studios",
+      "users_rating": 0.0,
+      "num_of_rating": 0,
+      "num_of_likes": 0,
+      "likes": [],
+      "genres": [2, 6, 20]
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 13,
+    "fields": {
+      "title": "Skyrim",
+      "image": "game_pics/skyrim.PNG",
+      "thumbnail": "thumbnail_pics/skyrim_thumb.png",
+      "description": "The Elder Scrolls V: Skyrim is an action role-playing game, playable from either a first or third-person perspective. The player may freely roam over the land of Skyrimùan open world environment consisting of wilderness expanses, dungeons, caves, cities, towns, fortresses, and villages.",
+      "developer": "Bethesda",
+      "users_rating": 0.0,
+      "num_of_rating": 0,
+      "num_of_likes": 0,
+      "likes": [],
+      "genres": [5, 6]
+    }
+  }
+]
