@@ -7,7 +7,8 @@ The project taught me how to use React and NextJS in order to build a responsive
 
 An admin Django account can be created in order to upload games in the admin page. On the games index page a responsive grid view of games are displayed, and a searchbar is also usable in order to filter by a game's title or by their genre tags. Each game has their own page in which detailed information on the game is displayed. Users are able to register to the website and log in, where they are then able to rate and comment on games. The users are also able to like games, which are then stored in a user's profile page. A user is also able to edit their email, profile image, and a profile description on their profile page. <br/>
 
-**Stack**: Django, Django Rest Framework, React, NextJS, React Redux, Bootstrap, CSS</br>
+**Stack**: </br>
+Django, Django Rest Framework, React, NextJS, React Redux, Bootstrap, CSS</br>
 
 
 **Sample Images**</br>
